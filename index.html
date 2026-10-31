@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Portfolio of Gustavo Mondini, a Brazilian game designer specialized in level design, with projects, articles and videos.">
+<meta name="theme-color" content="#0e0e10">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gustavo Mondini's Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0e0e10;--ink:#f6e4ec;--muted:#b39aa8;--accent:#f6a9cf;--card:#1a191c;--line:#2f2b2f}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 Figtree,system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+h1,h2,h3{font-family:"Bricolage Grotesque",Georgia,sans-serif;line-height:1.05;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+body.home::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url("img/brand/mondgine-watermark.png") center/min(80vmin,780px) no-repeat;opacity:.17}
+#app{position:relative;z-index:1}
+header{padding:72px 0 40px}
+header h1{font-size:clamp(2.4rem,7vw,5.2rem);font-weight:800;letter-spacing:-.02em;max-width:14ch}
+header p{margin:20px 0 0;font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--muted);max-width:30ch}
+
+.projects h2{font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:28px}
+.railwrap{position:relative}
+.railwrap:last-child{margin-bottom:60px}
+.rail{overflow-x:auto;overflow-y:hidden;padding:12px 0 40px;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.track{display:flex;gap:20px;width:max-content}
+.railwrap .arrow{top:132px}
+@media (max-width:600px){.railwrap .arrow{top:102px;width:40px;height:40px}}
+.railwrap.wide .card{aspect-ratio:16/9}
+.railwrap.wide .arrow{top:102px}
+@media (max-width:600px){.railwrap.wide .arrow{top:79px}}
+.card{position:relative;flex:0 0 auto;width:320px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;display:block;background:var(--card);text-decoration:none}
+.card .cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.card .name{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;font:800 1.5rem/1.1 "Bricolage Grotesque",sans-serif;color:#fff;background:linear-gradient(to top,rgba(8,8,10,.88),rgba(8,8,10,.1) 65%);opacity:0;transition:opacity .25s}
+.card .name small{display:block;margin-top:8px;font:500 .9rem/1.4 Figtree,sans-serif;color:#d9e2dc}
+.card.locked{cursor:default}
+.card:hover .name,.card:focus-visible .name{opacity:1}
+.card:hover .cover{transform:scale(1.05)}
+
+.plist{list-style:none;margin:0;padding:0 0 6px;display:flex;gap:12px;overflow-x:auto}
+.plist li{flex:1 1 0;min-width:200px}
+.pbtn{position:relative;display:flex;flex-direction:column;gap:8px;height:100%;padding:8px 8px 10px;border:2px solid var(--line);border-radius:10px;background:var(--card);text-decoration:none;transition:border-color .2s,transform .2s,background .2s}
+a.pbtn:hover,a.pbtn:focus-visible{border-color:var(--accent);transform:translateY(-2px);background:#211f23}
+.pbtn.locked{cursor:default}
+.pbtn .chip{height:44px;padding:6px 10px;border-radius:6px}
+.pbtn .chip img{max-height:28px}
+.ptext{display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 26px 0 4px}
+.pname{font:800 1rem/1.15 "Bricolage Grotesque",sans-serif;color:var(--ink)}
+.prole{font-size:.78rem;line-height:1.3;color:var(--muted)}
+.pbtn .go{position:absolute;right:10px;bottom:10px;width:18px;height:18px;color:var(--accent)}
+.about{padding:8px 0 100px}
+.about h2{font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:24px}
+.aboutgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:56px;align-items:start}
+.abouttext p{margin:0 0 1em;max-width:62ch}
+.abouttext .lead{font-size:1.2rem;color:var(--ink)}
+.morebtn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:4px 0;color:var(--accent);font:inherit;font-weight:500;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.morebtn[hidden]{display:none}
+.morebtn:hover{color:var(--ink)}
+.more{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .4s ease,opacity .4s ease}
+.more.open{grid-template-rows:1fr;opacity:1}
+.moreinner{overflow:hidden;min-height:0}
+.moreinner p:focus{outline:none}
+@media (prefers-reduced-motion:reduce){.more{transition:none}}
+.aboutfacts{margin:24px 0 0;padding:18px 0 0;border-top:2px solid var(--accent);display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px 24px}
+.aboutfacts dt{font-size:.85rem;color:var(--muted)}
+.aboutfacts dd{margin:2px 0 0;font-weight:500}
+.aboutphoto{position:relative;margin:0;justify-self:center;width:100%;max-width:380px;aspect-ratio:1/1;border:2px solid var(--accent);border-radius:22px;overflow:hidden;background:radial-gradient(circle at 50% 28%,#4a2e3f 0%,#241a22 55%,#17141a 100%);box-shadow:12px 12px 0 rgba(246,169,207,.16);align-self:start}
+.aboutphoto img{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:center bottom}
+@media (max-width:800px){.aboutgrid{grid-template-columns:1fr;gap:32px}.aboutphoto{order:-1;max-width:300px}}
+.card.nocover .name{opacity:1}
+.acad{padding:44px 0 8px;border-top:1px solid var(--line)}
+.project > h1 + .acad{border-top:0;padding-top:8px}
+.acad h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:24px}
+.acadtop{display:grid;grid-template-columns:minmax(0,315px) minmax(0,1fr);gap:36px;align-items:start}
+.coverlink{position:relative;display:block;line-height:0;border:2px solid var(--accent);border-radius:14px;overflow:hidden;background:var(--card);box-shadow:10px 10px 0 rgba(246,169,207,.16);transition:transform .25s}
+a.coverlink:hover,a.coverlink:focus-visible{transform:translateY(-3px)}
+.coverlink img{width:100%;height:auto;display:block}
+.cl{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 10px;background:linear-gradient(to top,rgba(8,8,10,.92),rgba(8,8,10,0));color:#fff;font:700 .95rem/1.2 Figtree,sans-serif}
+.acadinfo .aboutfacts{margin:0 0 18px;padding:0 0 0 18px;border-top:0;border-left:2px solid var(--accent);display:block}
+.ovh{font-size:1.15rem;color:var(--accent);margin:20px 0 8px}
+.contrib .para{max-width:65ch;margin:0 0 1em}
+.blist{max-width:65ch;margin:0 0 1.2em;padding-left:1.2em}
+.blist li{margin:10px 0}
+.coverlink.ph{aspect-ratio:315/250;display:grid;place-items:center;text-align:center;line-height:1.4;color:var(--muted);background:linear-gradient(160deg,#2b1f3a,var(--card))}
+.phtext{padding:0 16px;font-size:1rem}
+.acadcover{display:flex;flex-direction:column;gap:14px}
+.acadcover p{margin:0}
+.acadinfo .aboutfacts div + div{margin-top:12px}
+.acadinfo .lead{margin:0 0 6px;font-size:1.2rem;color:var(--ink)}
+.cast{position:relative;margin:40px 0 8px;padding:28px 16px 14px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 85%,rgba(120,96,220,.32),rgba(14,14,16,0) 68%),var(--card)}
+.cast ul{list-style:none;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-end}
+.cast li{--s:1;height:calc(var(--h) * var(--s));margin:0 -12px;position:relative;top:var(--dy);opacity:0;transform:translateY(46px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i) * .16s)}
+.cast.in li{opacity:1;transform:none}
+.sprite{display:block;height:100%;transition:transform .3s ease}
+.sprite:hover{transform:scale(1.07) rotate(-1.5deg)}
+.cast li img{height:100%;width:auto;display:block;filter:drop-shadow(0 12px 18px rgba(0,0,0,.55));animation:castfloat 5.5s ease-in-out infinite;animation-delay:calc(var(--i) * -1.3s)}
+@keyframes castfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.castcredit{margin:14px 0 0;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (max-width:600px){.cast li{--s:.68;margin:0 -8px}}
+@media (prefers-reduced-motion:reduce){.cast li{opacity:1;transform:none;transition:none}.cast li img{animation:none}}
+.acadmedia{margin:36px 0 8px}
+.rolegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 48px;margin:32px 0 8px}
+.role h3{font-size:1.15rem;color:var(--accent);margin:0 0 8px}
+.role p{margin:0}
+.audiolist{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.audiolist li{display:grid;gap:4px}
+.scframe{width:100%;height:300px;border:0;border-radius:10px;margin-top:12px}
+.sclink{margin:6px 0 0;font-size:.9rem}
+.sclink a{color:var(--muted)}
+.lb{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;background:rgba(6,6,8,.95)}
+.lb-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top,0px))}
+.lb-cap{color:var(--muted);font-size:.95rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-btns{display:flex;gap:10px;flex:none}
+.lb-btn{background:rgba(14,14,16,.9);border:2px solid var(--accent);border-radius:999px;color:var(--accent);padding:8px 18px;font:inherit;font-weight:500;cursor:pointer}
+.lb-btn:hover,.lb-btn:focus-visible{background:var(--accent);color:var(--bg)}
+.lb-stage{flex:1;min-height:0;overflow:hidden;display:grid;place-items:center;padding:4px 16px calc(20px + env(safe-area-inset-bottom,0px))}
+.lb-stage img{display:block;max-width:100%;max-height:calc(100vh - 92px);max-height:calc(100dvh - 92px);object-fit:contain;cursor:zoom-in}
+.lb.full .lb-stage{display:block;overflow:auto;text-align:center}
+.lb.full .lb-stage img{display:inline-block;max-width:none;max-height:none;cursor:zoom-out}
+.catintro{max-width:65ch;font-size:1.2rem;color:var(--ink);margin:0 0 8px}
+.ugc .lead{max-width:65ch;font-size:1.2rem;color:var(--ink);margin:0 0 24px}
+.kpistrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.kpi{display:flex;flex-direction:column;gap:4px;padding:20px 20px 18px;border:2px solid var(--accent);border-radius:14px;background:linear-gradient(160deg,#241b26,var(--card))}
+.kpi b{font:800 clamp(2.1rem,4.4vw,3.2rem)/1 "Bricolage Grotesque",sans-serif;color:var(--accent)}
+.kpi .kl{font-weight:500;color:var(--ink)}
+.kpi .kn{font-size:.88rem;color:var(--muted)}
+.kfoot{margin:8px 0 0;font-size:.85rem;color:var(--muted)}
+.ugch{font-size:1.25rem;color:var(--accent);margin:44px 0 14px}
+.prodgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.prod{padding:22px;border:2px solid var(--line);border-radius:14px;background:var(--card)}
+.prod h3{font-size:1.4rem;margin:0 0 4px}
+.prod .pp{margin:0 0 12px;font-size:.9rem;color:var(--muted)}
+.pk{display:flex;gap:28px;margin:10px 0 12px}
+.pk b{display:block;font:800 1.9rem/1 "Bricolage Grotesque",sans-serif;color:var(--accent)}
+.pk span{font-size:.85rem;color:var(--muted)}
+.prod .pf{margin:0 0 10px;font-size:.9rem;color:var(--ink)}
+.prod ul{margin:0 0 16px;padding-left:1.2em}
+.prod li{margin:6px 0}
+.tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.tags li{padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:.95rem}
+.pills{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.pills a,.pills span{display:inline-block;padding:9px 16px;border:2px solid var(--line);border-radius:999px;text-decoration:none;background:var(--card)}
+.pills a{border-color:var(--accent);color:var(--accent)}
+.pills a:hover,.pills a:focus-visible{background:var(--accent);color:var(--bg)}
+@media (max-width:800px){.prodgrid{grid-template-columns:1fr}}
+.pill{display:inline-block;padding:2px 10px;border:1px solid var(--accent);border-radius:999px;font-size:.75rem;line-height:1.5;color:var(--accent);background:rgba(14,14,16,.6)}
+.pills2{display:flex;gap:6px}
+.langtoggle{display:flex;gap:8px}
+.langbtn{padding:6px 16px;border:2px solid var(--accent);border-radius:999px;background:transparent;color:var(--accent);font:inherit;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .2s,color .2s}
+.langbtn:hover,.langbtn:focus-visible{background:rgba(246,169,207,.18)}
+.langbtn.on{background:var(--accent);color:var(--bg)}
+.arts{border-top:0;padding-top:12px}
+.artgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.art{position:relative;display:block;width:100%;aspect-ratio:1/1;padding:0;border:2px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .3s}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .4s}
+.artmeta{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding:48px 16px 16px;background:linear-gradient(to top,rgba(8,8,10,.95),rgba(8,8,10,0));opacity:0;transform:translateY(14px);transition:opacity .35s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.artmeta b{font:800 1.15rem/1.15 "Bricolage Grotesque",sans-serif;color:#fff}
+.artmeta time{font-size:.85rem;color:var(--muted)}
+.art:hover,.art:focus-visible{transform:scale(1.08);z-index:3;border-color:var(--accent);box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.art:hover img,.art:focus-visible img{transform:scale(1.07);filter:brightness(.75)}
+.art:hover .artmeta,.art:focus-visible .artmeta{opacity:1;transform:none}
+@media (hover:none){.artmeta{opacity:1;transform:none}.art:hover{transform:none}}
+.soonart{display:grid;place-items:center;text-align:center;border-style:dashed;color:var(--muted);cursor:default;line-height:1.5}
+.artmodal{position:fixed;inset:0;z-index:110;overflow-y:auto;background:rgba(6,6,8,.92);padding:24px 14px 40px;animation:artin .3s ease}
+@keyframes artin{from{opacity:0}to{opacity:1}}
+.artpanel{max-width:800px;margin:0 auto;padding:22px clamp(18px,5vw,56px) 36px;border:2px solid var(--line);border-radius:18px;background:var(--bg);animation:artup .4s cubic-bezier(.2,.8,.2,1);outline:none}
+@keyframes artup{from{transform:translateY(28px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.artbar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;margin:0 -8px 8px;padding:8px;background:linear-gradient(to bottom,var(--bg) 70%,rgba(14,14,16,0))}
+.arthead h1{font-size:clamp(1.9rem,5vw,3rem);line-height:1.08;margin:8px 0 12px}
+.artsub{margin:0 0 16px;font-size:1.2rem;line-height:1.4;color:var(--muted)}
+.artby{margin:0;font-size:.95rem;color:var(--muted)}
+.artby strong{color:var(--ink)}
+.adiv{border:0;height:1px;margin:34px 0;background:var(--line)}
+.adiv.strong{height:3px;margin:22px 0 28px;background:var(--accent);border-radius:3px}
+.artfig{margin:0 0 32px}
+.artfig img{width:100%;height:auto;display:block;border-radius:12px}
+.artfig figcaption{margin-top:8px;font-size:.88rem;color:var(--muted)}
+.artbody p{max-width:none;margin:0 0 1.15em;font-size:1.08rem;line-height:1.8}
+.artbody h2{font-size:clamp(1.4rem,3.4vw,1.9rem);color:var(--accent);margin:0 0 16px}
+.artbody .pull{padding:6px 0 6px 20px;border-left:3px solid var(--accent);font:800 1.25rem/1.4 "Bricolage Grotesque",sans-serif;color:var(--ink)}
+.artfoot{margin-top:32px;text-align:center}
+@media (prefers-reduced-motion:reduce){.artmodal,.artpanel{animation:none}.art,.art img,.artmeta{transition:none}}
+.contact{padding:8px 0 90px}
+.contact h2{font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:24px}
+.clist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.cbtn{display:flex;align-items:center;gap:16px;padding:14px 18px 14px 14px;border:2px solid var(--line);border-radius:14px;background:var(--card);text-decoration:none;transition:border-color .2s,transform .2s,background .2s}
+.cbtn:hover,.cbtn:focus-visible{border-color:var(--accent);transform:translateY(-2px);background:#211f23}
+.cico{flex:none;display:grid;place-items:center;width:50px;height:50px;border:2px solid var(--accent);border-radius:12px;color:var(--accent);transition:background .2s,color .2s}
+.cbtn:hover .cico,.cbtn:focus-visible .cico{background:var(--accent);color:var(--bg)}
+.ctext{display:flex;flex-direction:column;min-width:0}
+.clabel{font-size:.82rem;color:var(--muted)}
+.cval{font-weight:500;overflow-wrap:anywhere}
+.vcard{border:0;padding:0;font:inherit;text-align:left;cursor:pointer;color:inherit}
+.vcard .name{opacity:1;align-items:flex-end}
+.vcard .name span{font-size:1.1rem}
+.play{position:absolute;top:50%;left:50%;z-index:2;display:grid;place-items:center;width:54px;height:54px;margin:-31px 0 0 -27px;border:2px solid var(--accent);border-radius:50%;background:rgba(14,14,16,.78);color:var(--accent);transition:background .2s,color .2s,transform .2s}
+.vcard:hover .play,.vcard:focus-visible .play{background:var(--accent);color:var(--bg);transform:scale(1.08)}
+.chstrip{display:flex;align-items:center;gap:16px;margin:26px 0 8px;padding:12px 18px 12px 12px;border:2px solid var(--line);border-radius:14px;background:var(--card);text-decoration:none;transition:border-color .2s,transform .2s,background .2s}
+.chstrip:hover,.chstrip:focus-visible{border-color:var(--accent);transform:translateY(-2px);background:#211f23}
+.chstrip .ctext{flex:1}
+.chgo{flex:none;padding:8px 16px;border:2px solid var(--accent);border-radius:999px;color:var(--accent);font-weight:500;font-size:.92rem;transition:background .2s,color .2s}
+.chstrip:hover .chgo,.chstrip:focus-visible .chgo{background:var(--accent);color:var(--bg)}
+.ytsec{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:clamp(1.5rem,3.2vw,2.1rem);margin:44px 0 6px}
+.ytnote{margin:0 0 16px;font-size:.9rem;color:var(--muted)}
+.soonpill{font-family:Figtree,system-ui,sans-serif;font-size:.8rem;font-weight:500;padding:3px 12px}
+.shorts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;max-width:760px}
+.shorts li{aspect-ratio:9/16}
+.shorts li[aria-hidden="true"]{display:grid;place-items:center;text-align:center;border:2px dashed var(--line);border-radius:14px;background:var(--card);color:var(--muted);font-size:.9rem}
+.short{position:relative;display:block;width:100%;height:100%;padding:0;border:2px solid var(--line);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#5a2a52,#0b0b0d);color:#fff;font:inherit;text-align:left;cursor:pointer;transition:border-color .2s,transform .3s}
+.short img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.short:hover,.short:focus-visible{border-color:var(--accent);transform:translateY(-3px)}
+.short:hover img{transform:scale(1.05)}
+.short:hover .play,.short:focus-visible .play{background:var(--accent);color:var(--bg);transform:scale(1.08)}
+.stitle{position:absolute;left:0;right:0;bottom:0;padding:34px 12px 12px;background:linear-gradient(to top,rgba(8,8,10,.92),rgba(8,8,10,0));font:800 1rem/1.15 "Bricolage Grotesque",sans-serif}
+.shorts .slot{display:grid;place-items:center;width:100%;height:100%}
+.vshort{max-width:480px}
+.vidframe.vertical{width:min(100%,calc(76vh * 9 / 16));aspect-ratio:9/16;margin:0 auto}
+.vpanel{max-width:980px}
+.vpanel .artbar{margin:0 -8px 12px}
+.vt{min-width:0;margin-right:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:800 1.15rem/1.2 "Bricolage Grotesque",sans-serif}
+.vidframe{aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
+.vidframe iframe{width:100%;height:100%;border:0;display:block}
+.vlink{margin:12px 0 0;text-align:right;font-size:.95rem}
+.vlink a{color:var(--muted)}
+@media (max-width:640px){.chstrip{flex-wrap:wrap}.chgo{margin-left:62px}}
+.featured.small{max-width:480px}
+.trailerbox{margin-top:28px}
+.trailerbox video{width:100%;aspect-ratio:16/9;display:block;border-radius:12px;background:#000}
+.history{padding:8px 0 40px}
+.history h2{font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:26px}
+.jobs{list-style:none;margin:0;padding:0 0 0 26px;border-left:2px solid var(--line);display:grid;gap:30px}
+.job{position:relative}
+.job::before{content:"";position:absolute;left:-34px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px var(--bg)}
+.jobdate{display:block;font-size:.88rem;font-weight:500;color:var(--accent)}
+.jobtitle{margin:2px 0 0;font:800 clamp(1.15rem,2.6vw,1.45rem)/1.2 "Bricolage Grotesque",sans-serif}
+.jobco{margin:2px 0 6px;color:var(--muted)}
+.job .moreinner p{max-width:70ch;margin:10px 0}
+.artsfoot{margin:64px 0 8px;text-align:center}
+.logomini{width:44px;height:44px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer;opacity:.38;transition:opacity .25s,transform .25s}
+.logomini img{width:100%;height:100%;object-fit:contain;display:block}
+.logomini:hover,.logomini:focus-visible{opacity:1;transform:scale(1.12)}
+.gate{z-index:140;display:grid;place-items:center}
+.gateform{display:grid;gap:12px;width:min(92vw,340px);padding:24px;border:2px solid var(--accent);border-radius:16px;background:var(--bg)}
+.gateform input{padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.gateform input:focus{outline:none;border-color:var(--accent)}
+.gerr{min-height:1.2em;margin:0;color:#ff9db5;font-size:.9rem}
+.gbtns{display:flex;gap:10px}
+.artbody ul,.artbody ol{margin:0 0 1.15em;padding-left:1.4em;font-size:1.08rem;line-height:1.8}
+.artbody li{margin:4px 0}
+.artbody blockquote{margin:0 0 1.15em;padding:4px 0 4px 18px;border-left:3px solid var(--accent);font-style:italic;font-size:1.08rem;line-height:1.8}
+.callout{display:flex;gap:12px;margin:0 0 1.15em;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);line-height:1.7}
+.callout .ci{flex:none;display:grid;place-items:center;width:24px;height:24px;margin-top:2px;border:2px solid var(--accent);border-radius:50%;color:var(--accent);font:800 .8rem "Bricolage Grotesque",sans-serif}
+.artbody pre{margin:0 0 1.15em;padding:14px 16px;overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#0a0a0c}
+.artbody pre code,.ebcode{font:.95rem/1.6 ui-monospace,Consolas,monospace}
+.artbody pre code{background:none;padding:0}
+.artbody code,.ebt code{padding:1px 6px;border-radius:5px;background:#26222a;font-family:ui-monospace,Consolas,monospace;font-size:.92em}
+.artbody a,.ebt a{color:var(--accent)}
+.artbody h2.lvl1{font-size:clamp(1.5rem,3.6vw,2rem)}
+.artbody h3.lvl2{margin:1.6em 0 .6em;font:800 1.45rem/1.25 "Bricolage Grotesque",sans-serif}
+.artbody h4.lvl3{margin:1.4em 0 .5em;font:800 1.15rem/1.3 "Bricolage Grotesque",sans-serif}
+.todos{list-style:none;padding-left:0 !important}
+.todos li{display:flex;gap:10px;align-items:flex-start}
+.tick{flex:none;display:grid;place-items:center;width:20px;height:20px;margin-top:5px;border:2px solid var(--accent);border-radius:5px;color:var(--bg);font-size:.8rem}
+.todos .done .tick{background:var(--accent)}
+.todos .done span:last-child{color:var(--muted);text-decoration:line-through}
+.edmodal{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;background:var(--bg);color:var(--ink)}
+.edtop{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--line);background:#141316}
+.edname{font:800 1.05rem "Bricolage Grotesque",sans-serif}
+.edstatus{flex:1;min-width:150px;font-size:.85rem;color:var(--muted)}
+.edstatus.ok{color:#9be3b0}
+.edstatus.err{color:#ff9db5}
+.edbtns{display:flex;flex-wrap:wrap;gap:8px}
+.edbtns .lb-btn{padding:6px 14px;font-size:.9rem}
+.lb-btn.primary{background:var(--accent);color:var(--bg)}
+.edbtns button:disabled{opacity:.5;cursor:wait}
+.edscroll{flex:1;overflow-y:auto;padding:0 16px 90px}
+.edpage{max-width:820px;margin:0 auto;padding-top:24px}
+.edcoverbtn{width:100%;padding:34px 12px;border:2px dashed var(--line);border-radius:14px;background:var(--card);color:var(--muted);font:inherit;cursor:pointer}
+.edcoverbtn:hover{border-color:var(--accent);color:var(--accent)}
+.edhint{margin:8px 0;font-size:.85rem;color:var(--muted)}
+.edcovwrap{display:flex;gap:14px;align-items:flex-start}
+.edcard{flex:none;width:150px;height:150px;object-fit:cover;border:2px solid var(--accent);border-radius:12px}
+.edhero{flex:1;min-width:0;height:150px;object-fit:cover;border-radius:12px}
+.edfield{width:100%;margin-top:10px;padding:8px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.edcovbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.edtitle,.edsub{display:block;width:100%;padding:6px 0;border:0;border-bottom:2px solid transparent;background:none;color:var(--ink)}
+.edtitle{margin:26px 0 4px;font:800 clamp(2rem,5vw,3rem)/1.1 "Bricolage Grotesque",sans-serif}
+.edsub{margin:0 0 6px;font:400 1.2rem/1.4 Figtree,sans-serif;color:var(--muted)}
+.edtitle:focus,.edsub:focus{outline:none;border-bottom-color:var(--accent)}
+.edmeta{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0 8px}
+.edmeta label,.edform label{display:grid;gap:4px;font-size:.8rem;color:var(--muted)}
+.edmeta input,.edmeta select,.edform input{padding:7px 10px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.edform{display:grid;gap:10px}
+.edtools{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:18px 0 10px;padding:8px;border:1px solid var(--line);border-radius:12px;background:#141316}
+.edtools button{min-width:36px;height:34px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.edtools button:hover{border-color:var(--accent);color:var(--accent)}
+.edtools select{height:34px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+.edtools .sep{width:1px;height:22px;margin:0 4px;background:var(--line)}
+.eb{position:relative;display:flex;align-items:flex-start;gap:8px;margin:2px 0}
+.ebctl{position:absolute;right:0;top:-14px;z-index:2;display:flex;gap:2px;padding:2px;border:1px solid var(--line);border-radius:8px;background:var(--bg);opacity:0;transition:opacity .15s}
+.eb:hover .ebctl,.eb:focus-within .ebctl{opacity:1}
+.ebctl button{width:24px;height:24px;padding:0;border:0;border-radius:6px;background:none;color:var(--muted);font-size:.8rem;cursor:pointer}
+.ebctl button:hover{color:var(--accent)}
+.ebt,.ebcode,.ebcap{flex:1;min-width:0;padding:4px 2px;border-radius:6px;outline:none;font-size:1.08rem;line-height:1.7;overflow-wrap:anywhere}
+.ebt:focus:empty::before,.ebcode:focus:empty::before,.ebcap:empty::before{content:attr(data-ph);color:#6f6670;pointer-events:none}
+.eb-h1 .ebt{font:800 1.9rem/1.2 "Bricolage Grotesque",sans-serif}
+.eb-h2 .ebt{font:800 1.5rem/1.25 "Bricolage Grotesque",sans-serif}
+.eb-h3 .ebt{font:800 1.2rem/1.3 "Bricolage Grotesque",sans-serif}
+.eb-quote .ebt{padding-left:14px;border-left:3px solid var(--accent);font-style:italic}
+.eb-callout .ebt{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.eb-code .ebcode{margin:0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#0a0a0c;white-space:pre-wrap}
+.ebmark{flex:none;width:24px;text-align:center;line-height:1.7;color:var(--accent)}
+.ebchk{flex:none;margin:10px 4px 0;accent-color:var(--accent)}
+.eb-img .artfig{width:100%;margin:8px 0}
+.eb-img .ebcap{display:block;margin-top:6px;font-size:.9rem;color:var(--muted)}
+.eb-hr{padding:10px 0}
+.eb-hr .adiv{width:100%;margin:6px 0}
+.edadd{width:100%;margin-top:18px;padding:10px;border:1px dashed var(--line);border-radius:10px;background:none;color:var(--muted);font:inherit;cursor:pointer}
+.edadd:hover{border-color:var(--accent);color:var(--accent)}
+.slashmenu{position:fixed;z-index:125;width:280px;max-height:300px;overflow:auto;padding:6px;border:1px solid var(--line);border-radius:12px;background:#17151a;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.slashmenu .si{display:grid;gap:2px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.slashmenu .si span{font-size:.8rem;color:var(--muted)}
+.slashmenu .si.on,.slashmenu .si:hover{background:#2a2430}
+.edpanel{position:fixed;inset:0;z-index:128;display:grid;place-items:center;padding:16px;background:rgba(6,6,8,.78)}
+.edpanelbox{width:min(100%,580px);max-height:88vh;overflow:auto;padding:20px;border:2px solid var(--accent);border-radius:16px;background:var(--bg)}
+.edpanelhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.edpanelbox h3{margin:18px 0 8px;font-size:1.05rem;color:var(--accent)}
+.edpanelbox h3 small{font:400 .8rem Figtree,sans-serif;color:var(--muted)}
+.edlist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.edlist li{display:flex;gap:8px;align-items:stretch}
+.edopen{flex:1;display:grid;gap:2px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.edopen:hover{border-color:var(--accent)}
+.edopen small{color:var(--muted)}
+.edhelp{margin-top:12px;font-size:.9rem}
+.edhelp ol{margin:8px 0 0;padding-left:1.2em;line-height:1.6}
+@media (max-width:640px){.edcovwrap{flex-direction:column}.edhero{width:100%}.jobs{padding-left:20px}.job::before{left:-28px}}
+.alabel{margin:14px 0 0;font-size:.85rem;color:var(--muted)}
+.alabel + .audiolist{margin-top:6px}
+.atitle{font-size:.85rem;color:var(--muted)}
+.audiolist audio{width:100%;height:38px}
+.soonbox{padding:8px 12px;border:1px dashed var(--line);border-radius:8px;color:var(--muted);font-size:.9rem}
+@media (max-width:800px){.rolegrid{grid-template-columns:1fr}}
+.soon{color:var(--muted)}
+@media (max-width:800px){.acadtop{grid-template-columns:1fr;gap:24px}.coverlink{max-width:315px}}
+.partners{padding:8px 0 48px}
+.partners h2{font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:20px}
+.chip{display:flex;align-items:center;justify-content:center;height:64px;padding:10px 16px;border-radius:8px;background:#f7e8ef;color:#0e0e10;font:800 1rem/1.1 "Bricolage Grotesque",sans-serif;text-align:center;transition:transform .25s}
+.chip img{max-width:100%;max-height:44px;object-fit:contain}
+/* Project page */
+.back{display:inline-block;margin:40px 0 28px;color:var(--muted)}
+.project h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:800}
+.facts{display:flex;flex-wrap:wrap;gap:12px 40px;margin:24px 0 36px;padding:18px 0;border-block:1px solid var(--line)}
+.facts dt{font-size:.85rem;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-weight:500}
+.project p{max-width:65ch}
+.top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.top .facts{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin:8px 0 24px}
+@media (max-width:800px){.top{grid-template-columns:1fr;gap:24px}}
+.steam{display:inline-block;padding:10px 18px;border:2px solid var(--accent);border-radius:8px;text-decoration:none;font-weight:500}
+.videos:empty{display:none}
+.bottom{margin:48px 0 80px}
+.topbtn{margin:40px 0 28px}
+.steam:hover{background:var(--accent);color:var(--bg)}
+.video video{width:100%;height:100%;object-fit:cover;display:block}
+.contrib{margin:40px 0 8px}
+.contrib ul,.contrib .lead{max-width:65ch}
+.contrib h2{font-size:1.6rem;margin-bottom:12px}
+.contrib h3{font-size:1.15rem;margin:28px 0 8px;color:var(--accent)}
+.contrib .lead{font-size:1.15rem;color:var(--muted)}
+.contrib ul{margin:0;padding-left:1.2em}
+.contrib li{margin:8px 0}
+.car{position:relative;margin:28px 0 24px;aspect-ratio:16/9;max-width:760px;border-radius:10px;overflow:hidden;background:var(--card);transition:transform .35s}
+.car:hover{transform:scale(1.04);position:relative;z-index:2}
+.slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .8s}
+.slide.on{opacity:1}
+.slide img,.slide .ph{width:100%;height:100%;display:block}
+.slide img{object-fit:cover}
+.slide .zoom{display:block;width:100%;height:100%;cursor:zoom-in}
+.slide.fit{background:#fff}
+.slide.fit .zoom{position:absolute;top:0;left:0;right:0;bottom:76px;width:auto;height:auto}
+.slide.fit img{object-fit:contain;background:transparent}
+.slide video{position:absolute;top:0;left:0;right:0;bottom:76px;width:100%;height:calc(100% - 76px);object-fit:contain;display:block;cursor:pointer}
+.slide.fit .cap{min-height:76px;display:flex;align-items:center;padding:14px 22px;background:#0e0e10}
+.slide .ph{display:grid;place-items:center;color:rgba(255,255,255,.7);font-size:.9rem}
+.cap{position:absolute;left:0;right:0;bottom:0;padding:48px 22px 18px;font:800 clamp(1.15rem,2.8vw,1.7rem)/1.1 "Bricolage Grotesque",sans-serif;color:#fff;background:linear-gradient(to top,rgba(8,8,10,.88),rgba(8,8,10,0))}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;padding:0;border-radius:50%;border:2px solid var(--accent);background:rgba(14,14,16,.78);color:var(--accent);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s}
+.arrow:hover,.arrow:focus-visible{background:var(--accent);color:var(--bg)}
+.arrow.prev{left:12px}
+.arrow.next{right:12px}
+.count{position:absolute;top:12px;right:12px;z-index:3;padding:3px 11px;border-radius:999px;background:rgba(14,14,16,.78);color:var(--ink);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){.slide,.car{transition:none}}
+.featured{max-width:860px;margin:0 0 36px}
+.car.full{max-width:none}
+.note{margin:6px 0 0;font-size:.9rem;color:var(--muted);max-width:65ch}
+.media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:24px 0 36px;align-items:start}
+.media .car{margin:0;max-width:none}
+.vcap{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 14px;margin:10px 0 0;font-size:.9rem}
+.vtitle{font:800 1.05rem/1.2 "Bricolage Grotesque",sans-serif}
+.vcap a{color:var(--muted)}
+@media (max-width:700px){.media{grid-template-columns:1fr}}
+.alt{margin:8px 0 0;font-size:.9rem}
+.alt a{color:var(--muted)}
+.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;margin:40px 0 80px}
+.video{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--card);display:grid;place-items:center;color:var(--muted);border:1px dashed var(--line)}
+.video iframe{width:100%;height:100%;border:0}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem}
+
+@media (prefers-reduced-motion:reduce){.card .cover{transition:none}}
+@media (max-width:600px){.card{width:240px}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+/* ============ EDIT HERE: your projects ============
+   cover: path/link to the cover image (e.g. "img/game1.jpg"). Empty = placeholder color.
+   videos: YouTube IDs (the part after "v=" in the link). Empty = placeholder. */
+const PROJECTS = [
+  {slug:"sportia", title:"Sportia", studio:"Hermit Crab Studio", partnerLabel:"Partnership", partner:"Ubisoft",
+   cover:"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3897390/f53437221ec8d2a020b4f8a07966010967c326dd/header.jpg", color:"#c9503c",
+   locked:true, external:"https://store.steampowered.com/app/3897390/Sportia/"}, // not released yet: no page, no link. Full content is kept privately until launch.
+  {slug:"sky-dust", title:"Sky Dust", studio:"Orbit Studio", partnerLabel:"Publisher", partner:"Twin Sails Interactive",
+   cover:"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3066300/cb30b99727684343e5efe874830487a0ad0bfb28/header.jpg", color:"#3d7ea6",
+   role:"Producer, Level Designer, Game Designer & VFX Artist", period:"2024", release:"To be announced", genre:"Cyberpunk Metroidvania", platform:"PC (Windows)", engine:"Unity",
+   trailer:"KNlGr2Wrqqk",
+   steam:"https://store.steampowered.com/app/3066300/Sky_Dust/",
+   contribution:[
+     {title:"Production", points:[
+       "Planned the sequence of tasks to keep the team from running into blockers.",
+       "Managed the Kanban board, organizing and tracking all tasks.",
+       "Designed the asset request process for the artists."]},
+     {title:"Game Design", points:[
+       "Wrote the project's first GDD and first pitch, which were sent to publishers during pre-production.",
+       "Designed the linear structure of the game's quests.",
+       "Created the climb mechanic, which allows vertical navigation on level walls, an uncommon approach for a Metroidvania."]},
+     {title:"Level Design", points:[
+       "Designed the layout and room placement of the FTUE, the game's first mission.",
+       "Starting from Figma sketches, built the blockout with basic assets and greyboxes, requesting new assets when needed.",
+       "Once a level was complete in gameplay terms, handled set dressing: final assets, lighting and post-processing.",
+       "Created shaders and ambient effects with Shader Graph and VFX Graph, always balancing visuals against the render pipeline's performance."],
+      images:[{src:"img/sky-dust/level-first-sketch.png",title:"Level First Sketch",fit:true}],
+      // videos: paste each unlisted YouTube video ID between the quotes of "id"
+      videos:[{title:"Level Implementation", id:"S08_ri7_N-Y"},{title:"Level Final Implementation", id:"D8Cy8HHaUcQ"},{title:"Full Scene Development Process", id:"zGpRzd3GYqM"}],
+      featured:[{title:"Alternative Level Showoff", id:"TZPV4XtaICw"}]},
+     {title:"VFX & Shaders", points:[
+       "Built shaders and effects with VFX Graph and Shader Graph, including holograms, monitors projecting virtual textures, shock and lightning effects, projectile effects and the particles needed for gameplay.",
+       "Created a character shader that reacts to lighting through normal maps.",
+       "Created outline shaders on enemies to communicate damage to the player."],
+      images:[
+        {src:"img/sky-dust/electric-vfx.gif",title:"Electric VFX"},
+        {src:"img/sky-dust/electric-vfx-2.gif",title:"Electric VFX 2"},
+        {src:"img/sky-dust/electric-config.gif",title:"Electric Config"},
+        {src:"img/sky-dust/glitch-hologram-shader-graph.gif",title:"Glitch Hologram Shader Graph"},
+        {src:"img/sky-dust/dither-shader-graph.gif",title:"Dither Shader Graph"},
+        {src:"img/sky-dust/character-outline-shader-graph.gif",title:"Character Outline Shader Graph"}],
+      videos:[{title:"VFX Showoff", id:"-ugcFYBaYmI"}]}
+   ],
+   text:"A cyberpunk Metroidvania set in a ruined São Paulo after the destruction of the Moon. As a mercenary taking dangerous contracts, players explore interconnected districts, unlock new abilities and fight in fast, skill-based combat with parries, stealth executions and boss encounters.",
+   clips:[], videos:[]},
+  {slug:"ebenezer", title:"Ebenezer and the Invisible World", studio:"Orbit Studio", partnerLabel:"Publisher", partner:"Play on Worlds",
+   cover:"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2351120/header.jpg", color:"#6a994e",
+   role:"Level Designer, Game Designer & VFX Artist", period:"", release:"Nov 3, 2023", genre:"2D Metroidvania", platform:"PC (Windows), PS4, PS5, Xbox Series, Nintendo Switch", engine:"Unity",
+   trailer:"EbxqOXRCpqA",
+   steam:"https://store.steampowered.com/app/2351120/Ebenezer_and_the_Invisible_World/",
+   contribution:[
+     {title:"Game Design", points:[
+       "Designed the game's economy using math, Google Sheets and charts: the cost of items, equipment and consumables in the shops, and where they are placed in the game.",
+       "Used the economy model to predict where the player is in the game based on the purchasing power I wanted them to have.",
+       "Balanced the crafting system: ingredient availability, enemy drop rates, and how crafting progresses and evolves throughout the game.",
+       "Balanced enemy damage, speed, attack delay and moveset, and their distribution across the biomes to improve progression.",
+       "Designed the mirror mechanic: instead of fighting enemies, the player faces the environment inside a mirror world. The exit mirror grants special rewards and works as a fast travel, since it leads to a different place on the map than the entrance.",
+       "Defined the order of many rooms to improve the game's flow, and took part in designing the map and the biomes.",
+       "Designed several quests for acquiring the ghosts, which are the player's skills.",
+       "Wrote the game's narrative and dialogue."],
+      featured:[{title:"Mirror World Mechanic Preview", id:"z9D22q0kZAA"}]},
+     {title:"Level Design", points:[
+       "Built all 24 mirror rooms and their challenges: platforming, traps and lever puzzles leading to the mirror on the other side.",
+       "Created many rooms, starting from Figma sketches, moving to a 2D blockout with primitive shapes, then to final assets, post-processing, particles and lighting.",
+       "Designed puzzles and set up the levels' cameras with Cinemachine.",
+       "Defined the placement of rest and save rooms, a staple of the Metroidvania genre.",
+       "Implemented collectibles, resources, shopkeepers and many points of interest across the whole game."],
+      featured:[{title:"Scenes Designed by Me", id:"JfPAIY0EVMY"}]},
+     {title:"VFX", points:[
+       "Learned Unity's VFX plugin through its documentation and configured its parameters to create special effects, such as environment effects and the ghostly barriers that block the path in boss rooms."]}
+   ],
+   text:"A hand-drawn 2D Metroidvania that reimagines Dickens' A Christmas Carol in a Victorian-fantasy London. Ebenezer Scrooge teams up with ghosts whose abilities open new ways to traverse the map and fight the Unrepentant Ghosts.",
+   clips:[], videos:[]},
+  {slug:"haunted-house", title:"Haunted House", studio:"Orbit Studio", partnerLabel:"Publisher", partner:"Atari",
+   cover:"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1942330/header.jpg", color:"#8e5ea2",
+   role:"Level Designer, Game Designer & VFX Artist", period:"", release:"Oct 12, 2023", genre:"Roguelite stealth-adventure", platform:"PC (Windows), PS4, PS5, Xbox Series, Nintendo Switch", engine:"Unity",
+   trailer:"D07QbuCZ4T4",
+   steam:"https://store.steampowered.com/app/1942330/Haunted_House/",
+   contribution:[
+     {title:"Game Design", points:[
+       "Created the chase mechanic for the boss rooms. Each boss has three behavior and patrol routines, built as behavior trees and swapped as the player moves around the room, so the bosses feel organic and reactive instead of following a single predefined behavior.",
+       "Developed the concept of freeing allies in special rooms where the player faces sub-bosses.",
+       "Defined the economy of the base-building system.",
+       "Defined the economy and cost of the consumable items.",
+       "Developed the Trap Rooms: instead of fighting enemies, the player avoids traps to reach a final totem and complete the room. This breaks the survival-horror dynamic of this Metroidvania, giving it a platforming feel.",
+       "Wrote texts, dialogue and character biographies, and helped build the game's lore."]},
+     {title:"Level Design", points:[
+       "Designed rooms in the engine from diagrams drawn on paper, using primitive shapes to define colliders and objects.",
+       "Handled set dressing with Unity's native 2D lighting and multiple post-processing effects to create the haunted house's terrifying atmosphere.",
+       "Developed and implemented enemies and their patrols using splines with Bézier curves.",
+       "Developed and implemented the bosses in the boss scenes.",
+       "Built the basement boss rooms, where the player fights sub-bosses to free allies who become new playable characters.",
+       "Set up the game's cameras with Cinemachine.",
+       "Defined the progression of the player's permanent buffs together with the team."],
+      blocks:[
+        {video:{title:"Gustavo Mondini Gamescom Latam Interview - Haunted House Level Design", id:"X0aOevzP2AY",
+                note:"Note: This interview was given to a well-regarded news outlet in Brazil. Subtitles can be enabled in the YouTube settings."}},
+        {images:[{src:"img/haunted-house/witch-boss-room-diagram.png",title:"Witch Boss Room Diagram",fit:true},
+                 {src:"img/haunted-house/vampire-boss-room-diagram.png",title:"Vampire Boss Room Diagram",fit:true},
+                 {src:"img/haunted-house/ghost-boss-room-diagram.png",title:"Ghost Boss Room Diagram",fit:true}]},
+        {video:{title:"Witch Room Final", id:"3h3Ke1Jnrnk"}}]},
+     {title:"Trap Rooms", points:[],
+      blocks:[{videos:[{title:"Mechanic Tutorial Trap Scene", id:"eG2rEhBWrwg"},{title:"Trap Scenes Compilation", id:"XPyDYnbmJ3I"}]}]},
+     {title:"Biggest Level Design Challenge", points:[
+       "Every room is randomly placed within each biome, so a room's internal layout, its enemies and their patrols had to make sense no matter where the player entered or exited."]},
+     {title:"VFX", points:[
+       "Learned to use a VFX plugin to create particles, ghostly barriers, crystal destruction and some of the post-processing used in the levels."]}
+   ],
+   text:"A roguelite stealth-adventure that reimagines the classic Atari game. Lyn Graves sneaks through a procedurally generated mansion to recover urn shards guarded by bosses, and every run reshuffles the layout and enemy placement.",
+   clips:[], videos:[]}
+];
+
+/* ============ EDIT HERE: "Other Projects" categories (each opens its own page) ============
+   cover: optional image for the roleta card (empty = colored card with the title).
+   sections: the projects shown on the category page. */
+const OTHER = [
+  {slug:"academic-games", title:"Academic Games", sub:"Games developed during my degree", color:"#b4577f", cover:"img/covers/academic-games.jpg", titled:true, sections:[
+    {title:"Dormente", cover:"img/academic/dormente-cover.png", coverW:315, coverH:214,
+     link:"https://mondinao.itch.io/dormente-demo", linkLabel:"Play the demo on itch.io",
+     genre:"Turn-based RPG and dungeon crawler", dateLabel:"Developed", date:"From February 2024, as a university thesis project",
+     engine:"Unity",
+     roles:"Game Designer, Level Designer, VFX & Tech Artist and Narrative Designer",
+     overview:{
+       intro:"The game is a turn-based RPG and dungeon crawler, heavily inspired by SMT, Pokémon and Persona.",
+       more:["As the proposal for our thesis, we decided to emphasize the nuance between attributes and resources by 'shuffling' them. We transformed attributes such as strength, defense, magic and maximum number of turns into consumable and collectible resources. In this way, we turned passive elements into active ones for an RPG, aiming to revitalize the genre and address a common criticism of more traditional turn-based games."]},
+     // reel: images {src,title,fit,bg} and silent auto-playing videos {video,poster,title}. The title is the caption.
+     reel:[
+       {src:"img/academic/dormente-level-diagram-1st-block.png",title:"Dormente Level Diagram: 1st Block",fit:true,bg:"#595959"},
+       {src:"img/academic/dormente-level-diagram-2nd-block.png",title:"Dormente Level Diagram: 2nd Block",fit:true,bg:"#595959"},
+       {src:"img/academic/dormente-level-diagram-3rd-block-boss.png",title:"Dormente Level Diagram: 3rd Block (Boss)",fit:true,bg:"#595959"},
+       {src:"img/academic/dormente-portal.png",title:"Dormente Portal",fit:true,bg:"#202020"},
+       {src:"img/academic/dormente-enemy-patrol-spline.png",title:"Dormente Enemy Patrols with Splines",fit:true,bg:"#191919"},
+       {video:"img/academic/dormente-patrol-example.mp4",poster:"img/academic/dormente-patrol-example-poster.jpg",title:"Patrol Example",bg:"#000"},
+       {src:"img/academic/dormente-2nd-block-camera-setup.png",title:"2nd Block Camera Setup",fit:true,bg:"#000"},
+       {video:"img/academic/dormente-stellar-space-shader.mp4",poster:"img/academic/dormente-stellar-space-shader-poster.jpg",title:"Stellar Space Shader Config",bg:"#000"},
+       {src:"img/academic/dormente-balancing-archie-skills.png",title:"Balancing Sheet: Archie's Skills (in Portuguese)",fit:true,bg:"#fff"},
+       {src:"img/academic/dormente-balancing-enemies.png",title:"Balancing Sheet: Enemies (in Portuguese)",fit:true,bg:"#fff"},
+       {src:"img/academic/dormente-balancing-general-values.png",title:"Balancing Sheet: General Values (in Portuguese)",fit:true,bg:"#fff"}],
+     youtube:{title:"Dormente VFX Showcase", id:"1qKQnDoL_OI"},
+     summaries:{
+       level:"I planned each scene in Figma from a top-down view, using shapes, colors, arrows and indicators, and marked the tutorial directly on the diagrams. The dungeon has 3 floors, or 'Blocks', with a significant increase in difficulty between them. After the artists made a blockout in Blender from my diagrams, I added the enemy patrols with a 'Patrol Points' system and took part in the first set dressing for the university milestone in June 2024.",
+       game:"I developed and balanced the abilities and, together with the team, shaped the resource subversion concept, the checkpoint systems and the progression system. One of my main tasks was designing the Skill Tree of the main character, in collaboration with my Level Design colleague.",
+       vfx:"I created shaders and particle effects for the game: emissive particles, torch and sword flames, healing and defensive skills, attack sparks, breakable objects and chest-opening VFX, among others. I also built the 'Stonejourner' portal, which combines an emissive particle loop, a twirl-based spiral shader and a triplanar 'Stellar Space' shader.",
+       sound:"Alongside my main tasks, I also worked on the game's sound, from effects to music. For SFX, I look for sounds that closely match the desired result, then mix, adjust and balance them in Audacity and SoundTrap to make them game-ready.",
+       audioLabel:"Theme music",
+       audio:[{title:"Come To Me Avalon",src:"audio/dormente/come-to-me-avalon.mp3"},{title:"Masamune's Dance",src:"audio/dormente/masamunes-dance.mp3"},{title:"Archie (Ambience / exploration music)",src:"audio/dormente/archie-ambience.mp3"}]
+     }},
+    {title:"Kitty's Rescue", cover:"img/academic/kittys-rescue-cover.png", coverW:315, coverH:250,
+     link:"https://lipe-gamedev.itch.io/kitty-ao-resgate", linkLabel:"Play the game on itch.io",
+     genre:"Action platformer with hack and slash combat", dateLabel:"Developed", date:"September to November 2023",
+     engine:"Unreal Engine 4",
+     roles:"Game Designer, Narrative Designer, Encounter Designer, Level Designer and Sound Designer",
+     overview:{
+       intro:"A game made for university between September and November 2023. The theme of the project was transmedia, so we chose to subvert a medium: we subverted the tale of Puss in Boots so that the protagonist is the cat's partner, Kitty Softpaws.",
+       more:["It is an action platformer inspired by games like Crash Bandicoot, with combat inspired by hack and slash games like Devil May Cry and God of War."]},
+     youtube:{title:"Kitty's Rescue Video", id:"L7qnA5mGZwQ"},
+     summaries:{
+       level:"I made the diagrams, blockout and set dressing for the levels. I developed platforming challenges based on iconic references such as Crash Bandicoot and Ben 10 on PSP, and implemented navigation systems with AI and NavMesh.",
+       game:"I wrote the narrative, balanced the enemies, and developed the combos and combat behavior of the enemies. I also worked as an event and encounter designer.",
+       sound:"I created all of the game's sounds and a unique soundtrack for each level.",
+       audioLabel:"Music & SFX",
+       audio:[{title:"Music: Under the Hood",src:"audio/kittys-rescue/under-the-hood.mp3"},{title:"Music: Felin",src:"audio/kittys-rescue/felin.mp3"},{title:"SFX: Player Jump on Land",src:"audio/kittys-rescue/player-jump-on-land.mp3"},{title:"SFX: Player Slash",src:"audio/kittys-rescue/player-slash.mp3"}]
+     }},
+    {title:"Whispers from Candelaria", cover:"img/academic/whispers-cover.png", coverW:315, coverH:250,
+     link:"https://lipe-gamedev.itch.io/murmurios-da-candelaria", linkLabel:"Play the game on itch.io",
+     genre:"Psychological suspense thriller, 3D puzzle-platformer",
+     date:"July 2023, after 3 months of development",
+     engine:"Unity",
+     roles:"Game Designer, Level Designer, Narrative Designer and Composer / Sound Designer",
+     overview:{
+       intro:"A psychological suspense thriller in the style of Little Nightmares and Limbo, where the player solves puzzles in a 3D platforming environment to escape a ghostly locomotive.",
+       more:["The goal of the semester was to address a historical event or an environmental disaster. My team and I chose to depict the construction of the Madeira-Mamoré railway, inaugurated in 1912, which caused the deaths of many workers and staff because of poor conditions and inflated foreign investment.",
+             "Join Joanna on this final journey into the past, on this last locomotive. Discover the marks of what was hidden, and listen to those who were never heard..."]},
+     // cast: character sprites floating in their own band. h = height in px, dy = vertical offset in px.
+     cast:{credit:"Character art by André Bueno (Concept & 2D Artist)", items:[
+       {src:"img/academic/whispers-char-1.webp", alt:"Character art: a ghostly man with a cross armband holding a cloth", h:290, dy:0},
+       {src:"img/academic/whispers-char-2.webp", alt:"Character art: a woman in a hooded jacket", h:310, dy:-6},
+       {src:"img/academic/whispers-char-3.webp", alt:"Character art: a frightened ghostly worker in a hard hat", h:250, dy:0},
+       {src:"img/academic/whispers-char-4.webp", alt:"Character art: a ghostly butcher in an apron holding a knife", h:290, dy:-4}]},
+     summaries:{
+       level:"I designed the structure of the first level and helped with the post-processing settings and the ambiance of the scenes.",
+       game:"I was responsible for developing the tutorial flow and, together with my team, for determining the game's progression.",
+       narrative:"This was my main contribution. Building on the historical research of my colleague Alexandre Luz, I developed the characters' personalities, motivations and purposes, and used a three-act structure to tie the story together. Joanna, a journalist, falls asleep on a train and wakes up in a parallel world, where in each car she solves a puzzle and speaks with someone harmed by the construction of the railway.",
+       sound:"As it was my first horror game, I studied and played several games to find references and methods. Using an open-source sound library, I mixed and adjusted the sounds to create an oppressive and terrifying atmosphere. The game's thematic soundtrack became memorable enough to stay in the player's mind even in silence.",
+       audioLabel:"OST",
+       audio:[{title:"Mamorequiem",src:"audio/whispers/mamorequiem.mp3"}]
+     }},
+    {title:"Simple Tasks", cover:"img/academic/simple-tasks-cover.png", coverW:315, coverH:250,
+     link:"https://luckyboys-team.itch.io/simple-tasks", linkLabel:"Play the game on itch.io",
+     date:"June 2022, after 3 months of development",
+     engine:"Unity",
+     roles:"Game Designer, Narrative Designer and Composer / Sound Designer",
+     overview:{
+       intro:"Simple Tasks is a game in which you control a protagonist on the autism spectrum. They must complete small tasks around their home and, through their unique perspective, everyday activities become a little more enjoyable for the player, encouraging reflection and, above all, inclusion.",
+       more:["The theme of the semester was inclusion. We researched in depth what autism really is, and spoke with parents of autistic children and with professionals in the field. Our goal was not to simulate perfectly what it is like to be on the autism spectrum, because that is not our place to represent. Instead, we wanted to prompt typical players to reflect on the topic and, through cultural proximity, bring more awareness and conversation into everyday life, fostering a more natural form of inclusion."]},
+     youtube:{title:"Simple Tasks Video", id:"Llu0Igfd6sU"},
+     summaries:{
+       game:"My biggest challenge was aligning the concept with the gameplay while taking great care not to seem pretentious or offensive. The research and documentation work of this semester was also crucial, and it gave me valuable experience that I would like to have more often. It was a game with real weight and importance.",
+       narrative:"I created the family context of Lo, the protagonist, through a story that unfolds as the boy tackles his challenges. By exploring the environment and interacting with collectibles, the player learns that Lo's father is a hardworking man who, because of the costs of Lo's care, ends up somewhat absent. He communicates with his son through Lo's special interest: birds. Because of this absence, the boy becomes independent and diligent, as well as creative and proactive in solving his 'simple tasks'.",
+       sound:"As in my other projects, I was responsible for the composition and sound design. Since I was also managing other areas, I composed only one thematic piece, meant to reflect childhood and tranquility and heavily inspired by the relaxing soundtracks of games like Minecraft.",
+       soundcloud:{title:"Simple Tasks OST on SoundCloud", url:"https://soundcloud.com/gmondinii12/sets/simple-tasks-ost"}
+     }},
+    {title:"Bluebell Project", cover:"img/academic/bluebell-cover.png", coverW:315, coverH:250,
+     link:"https://mondinao.itch.io/bluebell-project", linkLabel:"Play the game on itch.io",
+     genre:"Side-scrolling shooter",
+     date:"2021, after 3 months of production",
+     engine:"Unity",
+     roles:"Producer, Game Designer, Level Designer, Narrative Designer, Lead Programmer, 2D Artist and Composer / Sound Designer",
+     overview:{
+       intro:"A small side-scrolling shooter, made for a semester proposal to recreate a classic arcade game while adding an innovation that was not in the original.",
+       more:["It was the first game I made for university and my first time using the engine, long before I started taking part in game jams. I took on many roles in this small game, which was made with a lot of care and cuteness.",
+             "The protagonist controls Virginia, a girl in a dystopian future where machines have revolted against humanity. Her mother was a brilliant scientist who believed she had found a solution, but she disappears shortly after, leaving Virginia alone. In search of her mother, Virginia teams up with the only good robot in the world, Sentinel-V, built by her mother to keep her company. Together they face different environments until they reach the final terminal in cyberspace."]},
+     reel:[
+       {src:"img/academic/bluebell-tutorial-level.jpg",title:"Bluebell Project: Tutorial Level"},
+       {src:"img/academic/bluebell-city-level.jpg",title:"Bluebell Project: City Level"},
+       {src:"img/academic/bluebell-space-level.jpg",title:"Bluebell Project: Space Level"}],
+     summaries:{
+       level:"Although level design is now my specialty, in my second semester of college my role was smaller: I was responsible only for the layout, prototyping and implementation of the first level.",
+       game:"I created the mechanic that revitalized the original game: the bluebell flowers, collectibles spread throughout the game that determine the ending and add an emergent narrative. If the player collects all the bluebells in each level, Virginia finds the good ending; otherwise, she gets the 'less good' one. I also defined and developed the abilities and limitations of both the enemies and the protagonist.",
+       narrative:"With little experience and little time, I wrote short texts that explain what happened and placed them between levels as mandatory readings. They are presented as files left by Virginia's mother, guiding the player and constantly reminding them of the main objective. The narrative shines when it becomes interactive: Sentinel-V either sacrifices himself to save the world, if Virginia fails to collect all the bluebells, or survives, if she collects them all. I organized the story into a three-act structure.",
+       other:[{title:"Programming & 2D Art", text:"At the beginning of college we had no well-defined roles, so I tested many areas. The main one was programming, which became my responsibility even before we had a class on object-oriented programming. I also made the 2D art in Illustrator for the enemies and Sentinel-V, while my colleague Alexandre Luz handled the animations and the character Virginia."}],
+       sound:"In the following semesters I composed three pieces of music, one for each level, aiming for a lo-fi atmosphere with occasional arcade elements. I also used minor melodies to add more weight and drama to the narrative.",
+       audioLabel:"Music",
+       audio:[{title:"Virginia Theme",src:"audio/bluebell/virginia-theme.mp3"},{title:"Sentinel Theme",src:"audio/bluebell/sentinel-theme.mp3"},{title:"Server Theme",src:"audio/bluebell/server-theme.mp3"},{title:"Theme 20XX",src:"audio/bluebell/theme-20xx.mp3"}]
+     }}
+  ]},
+  {slug:"ugc", title:"UGC", sub:"User-generated content", color:"#5a6fb3", cover:"img/covers/ugc.jpg", titled:true, sections:[],
+   ugc:{
+     title:"Fortnite and Metaverse",
+     lead:"When I started working at Hermit Crab Studio, I took on the role of Level Designer. It was my first experience with the Metaverse: using Unreal Editor for Fortnite (UEFN), I created several successful maps and experiences on the Fortnite platform.",
+     intro:["I worked on Fortnite experiences heavily focused on player retention, engagement loops and live-service performance. I developed Tycoon-style experiences that consistently exceeded internal KPI expectations, especially in branded partnerships with major Brazilian football clubs such as CR Vasco da Gama, Clube Atlético Mineiro and Grêmio Foot-Ball Porto Alegrense, as well as collaborations with the Confederação Brasileira de Voleibol and Caixa Econômica Federal."],
+     more:["Beyond strengthening my technical execution as a Level Designer, I significantly expanded my expertise as a Game Designer, integrating brand identity directly into gameplay experiences and designing engaging systems and mechanics aligned with retention and engagement goals. I worked extensively with live-service KPIs, including single-session retention, D1/D7 retention, progression pacing and engagement optimization, which gave me strong practical knowledge of player behavior and live operations design.",
+           "I also gained hands-on experience with live updates and post-launch support for successful projects such as Cars Tuning Tycoon, helping design seasonal events, progression updates and community-oriented content strategies. Working closely with player communities helped me better understand player motivation, feedback cycles and long-term engagement patterns.",
+           "One of the most rewarding challenges of my Fortnite experience was balancing genuinely satisfying gameplay with business, retention and marketing objectives in a highly competitive live-service ecosystem."],
+     highlights:[
+       {value:"18,990", label:"Peak CCU", note:"Grêmio's Football Tycoon"},
+       {value:"40.2 min", label:"Average session length", note:"Grêmio's Football Tycoon"},
+       {value:"8,764", label:"Peak CCU", note:"Vasco's Soccer Team Tycoon"},
+       {value:"Exceeded", label:"Internal KPI expectations, consistently", note:"Tycoon-style and branded experiences"}],
+     products:[
+       {title:"Grêmio's Football Tycoon", partner:"Branded experience in partnership with Grêmio Foot-Ball Porto Alegrense",
+        kpis:[["18,990","Peak CCU"],["40.2 min","Average session"]],
+        points:["Designed updates, live events, retention systems and player engagement strategies.","Focused on long-term progression pacing and session retention optimization."],
+        link:"https://fortnite.gg/island/8773-9657-5309"},
+       {title:"Vasco's Soccer Team Tycoon", partner:"Branded experience in partnership with CR Vasco da Gama",
+        kpis:[["8,764","Peak CCU"],["25.5 min","Average session"]], focus:"Retention focus: D1 and session retention",
+        points:["Designed gameplay progression loops and economy balancing.","Improved the onboarding flow and reward pacing for better player retention."],
+        link:"https://fortnite.gg/island/1701-7859-9582"},
+       {title:"Surf Tycoon", partner:"Tycoon experience",
+        kpis:[["1,473","Peak CCU"],["30.9 min","Average session"]],
+        points:["Developed systems and gameplay features.","Focused on level design and mapping.","Focused on scalable progression and engagement loops."],
+        link:"https://fortnite.gg/island/3286-6093-6738"},
+       {title:"American Football Tycoon", partner:"Tycoon experience",
+        kpis:[["581","Peak CCU"],["28.7 min","Average session"]],
+        points:["Worked on progression systems and gameplay structure.","Designed the flow, balancing, progression systems, mechanics and retention strategies.","Worked on live ops content to improve D1 to D7 retention."],
+        link:"https://fortnite.gg/island/3737-8784-3421"}],
+     rldd:{
+       text:"To start working on a new platform, I first needed to learn Fortnite's predefined physics and scaling values. For that, I developed an RLDD (Rational Level Design Document) and a gym with Fortnite-specific measurements. I ran tests on jumping, sprinting, swimming and blocking abilities, and created a spreadsheet to map out difficulty levels and scaling.",
+       images:[
+         {src:"img/ugc/jump-heights-gym.jpg",title:"Jump Heights",fit:true,bg:"#111"},
+         {src:"img/ugc/jump-difficulty-sheet.png",title:"Jump Heights: Difficulty Spreadsheet",fit:true,bg:"#fff"},
+         {src:"img/ugc/swim-gym.jpg",title:"Swim",fit:true,bg:"#111"},
+         {src:"img/ugc/measures-sheet.png",title:"Measures",fit:true,bg:"#fff"}]},
+     experience:["Live-service design and retention-oriented systems","D1/D7 engagement strategies","Economy balancing and progression pacing","KPI-oriented iteration workflows","Seasonal live ops content","Player behavior analysis and engagement optimization","Cross-disciplinary collaboration in Agile production environments","AI-assisted workflows for documentation, balancing and production efficiency"],
+     trailer:{title:"Baseball Tycoon Trailer", src:"img/ugc/baseball-tycoon-trailer.mp4", poster:"img/ugc/baseball-tycoon-trailer-poster.jpg", link:"https://fortnite.gg/island/0752-0223-8137"},
+     othersIntro:"I also worked on many other Fortnite maps with a variety of themes. The Metaverse is a matter of consistency and not just big numbers, so they have not performed as well, but they are still great content with their own merits, which I'm proud of.",
+     others:[{title:"Ice Hockey Tycoon",link:"https://fortnite.gg/island/7474-2891-9022"},{title:"Baseball Tycoon",link:"https://fortnite.gg/island/0752-0223-8137"},{title:"Coconuts vs Pirates",link:"https://fortnite.gg/island/0534-2548-0763"},{title:"Sports Only Up"},{title:"Football Goal Tycoon",link:"https://fortnite.gg/island/4600-2680-7823"},{title:"Skate Trick Simulator",link:"https://fortnite.gg/island/7178-9189-3451"}]
+   }},
+  {slug:"game-jams", title:"Game Jams", sub:"Games made during game jams", color:"#7d5ba6", cover:"img/covers/game-jams.jpg", titled:true,
+   intro:"After my first game jam, which I joined about six months after starting the game design course, I met the Rataiada team, who taught me a lot. Together we created three games for game jams. In those projects I mainly worked on Game Design and Sound Design, but I was also able to experience various other areas, which broadened my perspective.",
+   sections:[
+    {title:"50 Years of Gaming", cover:"img/jams/50-years-of-gaming.jpg", coverW:960, coverH:540, link:"https://rataiada.itch.io/50-years-of-gaming", linkLabel:"Play on itch.io",
+     genre:"Platformer, a tribute to platform games",
+     dateLabel:"Developed", date:"2021, in 48 hours, for the Jam for All game jam",
+     roles:"Pixel Artist, Enemy Designer and Composer / Sound Designer",
+     overview:{
+       intro:"A homage to video games that traces their evolution over 50 years, with each level inspired by a game from a different decade.",
+       more:["The levels are inspired by Pong (1970s), Super Mario Bros (1980s), Super Metroid (1990s), Limbo (2000s) and Celeste (2010s).",
+             "The theme of the jam was \"50\", which could be interpreted freely, so we chose to honor 50 years of game development. The game can be played in its web version on itch.io.",
+             "It was my first game jam, so I experimented with several areas along the way."]},
+     summaries:{
+       game:"I designed the enemies for the levels inspired by Super Mario Bros and Super Metroid.",
+       other:[{title:"Pixel Art", text:"I experimented with creating pixel art, including assets and animations for the Celeste-inspired level."}],
+       sound:"I composed the soundtrack for all of the levels together with my colleague Thierry Gaspar."
+     }},
+    {title:"Build'em Up", cover:"img/jams/buildem-up-logo.png", coverW:640, coverH:320, coverBg:"#efe6d6", link:"https://enezio.itch.io/buildem-up", linkLabel:"Play on itch.io",
+     // the gameplay clip is a small, silent video that plays only while it is on screen (no heavy GIF)
+     reelSmall:true,
+     reel:[{video:"img/jams/buildem-up-gameplay.mp4", poster:"img/jams/buildem-up-gameplay-poster.jpg", title:"Build'em Up Gameplay", bg:"#000"}],
+     genre:"Beat 'em up",
+     dateLabel:"Developed", date:"In 48 hours, for the Magalu game jam",
+     roles:"Game Designer and Composer / Sound Designer",
+     overview:{
+       intro:"A beat 'em up created in 48 hours for the Magalu game jam, in which the player must use and upgrade tools from a construction site to fend off waves of aliens and save the neighborhood from the invasion."},
+     summaries:{
+       game:"I played a significant role in the game design and in planning the mechanics. As the team member with the most experience in beat 'em ups, I was able to exercise a lot of creativity with the skills and combat mechanics.",
+       sound:"My main role was in Sound Design. Besides composing all of the music, I created the sound effects: using tools like Audacity, I transformed sounds from various sources into custom sounds that matched what we were aiming for in the game."
+     }},
+    {title:"Super Dumb Cyber Rangers", cover:"img/jams/super-dumb-cyber-rangers.png", coverW:347, coverH:275, link:"https://rataiada.itch.io/dumb-rangers", linkLabel:"Play on itch.io",
+     dateLabel:"Developed", date:"In 48 hours, for the Wowie 4.0 game jam",
+     roles:"Game Designer, Level Designer and Composer / Sound Designer",
+     overview:{
+       intro:"A game created in 48 hours for the Wowie 4.0 game jam. The theme was AI, so we chose to create a parody team of Power Rangers as the controllable characters.",
+       more:["The player's objective is to assign each member to a part of the \"Megazord\": one controls the movement, another controls the attack, and the other manages the special ability."]},
+     summaries:{
+       game:"Together with the Game and Level Design team, I developed the systems and designed the game mechanics, including buffs and debuffs, status effects and the planning of the game's progression.",
+       sound:"I also worked on the soundtrack and composed the music, with strong inspiration from the theme music of Mighty Morphin Power Rangers."
+     }}
+   ]},
+  {slug:"articles-and-analysis", title:"Articles and Analysis", sub:"Articles and game analysis", color:"#a14fc0", cover:"img/covers/articles-and-analysis.jpg", titled:true, articles:true,
+   intro:"I am a games journalism enthusiast, and I love writing about the market, the industry and game reviews. This page is a repository of those articles.",
+   sections:[]},
+  {slug:"game-design-youtube", title:"Game Design YouTube", sub:"Game design on YouTube", color:"#c0674b", cover:"img/covers/game-design-youtube.jpg", titled:true, sections:[],
+   youtube:{
+     lead:"I love sharing and connecting with other developers and people who are passionate about games.",
+     more:["That is why I have an initiative to share videos on YouTube with analyses of some of my favorite games, as well as theory videos about game design and level design."],
+     channel:{url:"https://www.youtube.com/@GustavoMondini", name:"Gustavo Mondini", handle:"@GustavoMondini"},
+     videosNote:"The videos are in Portuguese.",
+     videos:[
+       {id:"JYRo4Y62SoQ", title:"Princípios do Level Design"},
+       {id:"iQeuNvh2mEs", title:"UX/UI Designer - Áreas do Game Design"},
+       {id:"GR9WZWIXifw", title:"Xenoblade Chronicles 3 - Review (Análise)"},
+       {id:"QxcNfhdjLi4", title:"A Mensagem de Death Stranding"},
+       {id:"pwd6-mZkOWQ", title:"Design de Narrativa - Áreas do Game Design"},
+       {id:"hZAnwbdI7WU", title:"One Piece Odyssey vai ser bom?"}],
+     shortsNote:"My Shorts live here. More are on the way.",
+     shorts:[{id:"99JbhhHtqiA", title:"Game Design Short"}]
+   }}
+];
+
+/* ============ EDIT HERE: articles (shown on the Articles and Analysis page) ============
+   body: plain text. Blank line = new paragraph, "## " = section heading, "> " = highlighted line, "---" = divider. */
+const ARTICLES = [
+  {id:"big-2022", title:"O que aprendi como Monitor do BIG 2022",
+   subtitle:"Lições de design, comunicação e acessibilidade vividas dentro do BIG Festival",
+   author:"Gustavo Mondini", role:"Jr. Game Designer", date:"July 24, 2022", iso:"2022-07-24", lang:"pt-BR", langLabel:"Portuguese",
+   card:"img/articles/big-2022-card.jpg", photo:"img/articles/big-2022-photo.jpg",
+   photoAlt:"Gustavo Mondini and Shuhei Yoshida smiling and giving thumbs up at the BIG Festival",
+   caption:"Com Shuhei Yoshida no BIG Festival.",
+   body:`O BIG Festival é um festival brasileiro que tem o objetivo de divulgar e apoiar a indústria de games nacional, assim como desenvolvedores e estúdios independentes. Isso é feito através de sua divulgação, rodadas de negócios com patrocinadores dentro do evento e palestras que envolvem filosofias do Game Design. É claro que ao longo dos anos o BIG tem se tornado um evento mais popular e isto trouxe uma abrangência maior de público-alvo. Este ano, o BIG recebeu grandes apoiadores como Magazine Luiza e Omelete (Que é de fato o maior propagador da cultura nerd e geek, trazendo conteúdo com excelência internacional para o público brasileiro em mídias sociais).
+
+Houve algumas contradições com relação à edição do BIG de 2022. O fato de ter se voltado mais para o “Mainstream” incomodou alguns que diziam que isto tirava o foco e o apoio de desenvolvedores independentes, que é a proposta do evento.
+
+Porém, como um desenvolvedor de jogos júnior e entusiasta do jornalismo de games, tenho minha opinião concreta de que a importância desse evento para minha carreira como Game Designer foi algo ao qual eu serei grato para o resto de minha vida, e ao longo deste artigo, irei explicar as razões.
+
+---
+
+## O que eu fiz no BIG 2022?
+
+Iniciei meus estudos no curso de Game Design da Universidade Anhembi Morumbi em janeiro de 2021. Desde então, claro que meu sonho se tornou conseguir alguma oportunidade de estágio ou entrar no mercado nacional que admiro tanto. Então quando surgiu a oportunidade de trabalhar no BIG, prontamente iniciei minha inscrição e após um processo seletivo fui convocado para trabalhar no festival como Super Monitor.
+
+Este cargo recebe um nome bonito, mas a principal função foi ajudar as pessoas a configurar os jogos e dispositivos e tirar dúvidas sobre os aparelhos.
+
+Claro, com minha paixão por video-games, isso se tornou muito maior dentro de mim. Busquei conhecer sobre cada jogo que estava em exposição, pois eu queria propagar a cultura do game design quando houvesse oportunidade. Explicar para a pessoa, por exemplo, que “Solar Ash” era um jogo que tinha foco em sua narrativa audiovisual, e era de um estúdio independente que veio crescendo, publicado pela Annapurna Interactive.
+
+Eu interagi com as pessoas para tentar mostrar a beleza por trás do simples ato de jogar, pois afinal, isso é o BIG. Fico feliz em dizer que isto me trouxe experiências incríveis que nunca serei capaz de esquecer, e algumas delas vou deixar para descrever em tópicos a seguir.
+
+Além da parte da monitoria dos games em exposição, fui encarregado de administrar algumas das palestras e eventos que ocorreram dentro do auditório, como o CBCS (Circuito brasileiro de Counter Strike) e principalmente a grande premiação dos jogos.
+
+Como eu sou um fanático por Final Fantasy, não perdi a oportunidade de pedir para ajudar no auditório durante a palestra de Takashi Tokita (Lead Designer de Final Fantasy 4, Chrono Trigger e Live A Live)
+
+---
+
+## O que aprendi como Designer?
+
+O ato de observar, conversar e interpretar as pessoas que estavam jogando me permitiu adquirir um grande repertório de dados sobre o feedback das pessoas. Seja que tipo de jogabilidade se torna atraente de cara ou que tipo de mecânica demora um pouco mais para pegar. Quais pessoas se interessam mais pelos jogos menores e experimentais ou quais se interessam pelas grandes marcas.
+
+O conjunto dessas informações me permite melhorar meu trabalho pessoal e me preparar para a parte de contato com usuários, que é muito importante no processo de produção de um game.
+
+Tive a oportunidade, no dia do meu treinamento (um dia antes da abertura) de jogar todos os jogos em exposição, tanto das grandes publicadoras que fizeram presença no evento, quanto dos desenvolvedores e estudantes brasileiros.
+
+Ter essa “overdose” de conteúdo enriqueceu muito minhas referências. Fui apresentado a mecânicas inovadoras como um game que utiliza leitor facial do iPhone como input, ou o game “Welcome Back” que trouxe uma Demo tão polida que me agarrou do início ao fim e fez com maestria o ato de desenvolver a narrativa o suficiente para entrar na Steam e pesquisar o jogo logo que eu chegasse em casa. Este tipo de contato com inovação e experimentação não é possível ter dentro de casa, por mais que você pesquise.
+
+O principal legado que tive como designer foi a mensagem de que este sonho é possível. Ver a beleza de jogar jogos de pessoas, para pessoas e com pessoas me motivou muito a continuar nessa jornada. As pessoas que estavam lá jogando são como eu, amam games. Porém mais do que isto, as pessoas que estavam expondo seus jogos também são como eu: amam fazer jogos, e amam a felicidade que podem trazer com poucos minutos de interatividade que tiveram com a audiência.
+
+---
+
+## O que aprendi sobre a comunicação
+
+Falar com as pessoas é a habilidade mais importante que podemos desenvolver, pessoalmente e profissionalmente. O que nos difere de neandertais é a capacidade de viver em sociedade e cooperar, portanto o trabalho de monitor me permitiu treinar, aprender e exercer a comunicação de forma que nunca tinha feito antes.
+
+Sempre fui aficionado por literatura, texto e redação, principalmente o jornalismo do nicho ao qual pertenço (games e cultura pop). Poder conversar com as pessoas sobre os jogos que elas gostam, o que elas gostaram no evento, o que elas jogaram e conhecê-las foi algo muito importante para minha formação.
+
+Como escritor, o texto é sempre apoiado em suas referências e sua bagagem cultural, e a proporção do contato humano proporcionado por eventos como o BIG, que colocam muitas pessoas com um mesmo interesse em um ambiente em comum, enriquece muito a erudição e favorece o repertório.
+
+Sinto que essa experiência me trouxe conhecimentos sociais que poucas pessoas tiveram a oportunidade de obter. Fora o fato de que, ao trabalhar na organização do evento, tive contato com pessoas da produção e do desenvolvimento, me permitindo conhecer mais sobre diversas áreas e aumentando tanto meu conhecimento sobre o nicho de games quanto de diversas outras profissões.
+
+Além disso, tive a oportunidade de conhecer grandes referências pessoais (ou ídolos) que tenho relacionados à comunicação. Consegui conhecer o gênio da comunicação Felipe Goldenberg (“Goldenboy”) que trabalha atualmente no Canaltech, um veículo muito importante de tecnologia. Conheci também Angelo Sarmiento (Analista de produto da Omelete Company), que eu já havia visto em produções do The Enemy (Veículo focado em games do Omelete). Poder conversar, por mais que de forma ligeira, com grandes inspirações que tenho para a área do jornalismo de games, também me motivou a, inclusive, redigir este artigo com o intuito de transmitir minhas experiências com as outras pessoas.
+
+A experiência no BIG tornou claro para mim a importância que estes e outros influenciadores têm para indústria. Muitas vezes eles sofrem críticas por estarem no “jogo do capitalismo” e dobrarem-se aos patrocínios ou divulgações tendenciosas. Mas a beleza do trabalho de trazer informação sobre algo que amamos, na tentativa de unir as pessoas por um interesse em comum, é muito maior do que estas falácias, e no fim, o que eles fazem move a economia e a motivação das pessoas do mercado de games.
+
+Trago como exemplo minha experiência pessoal. Se eu não consumisse o conteúdo produzido por veículos como Omelete, Nautilus, The Enemy, IGN etc. é provável que eu nunca tivesse me interessado por Game Design ou visto como uma profissão.
+
+---
+
+## O mais importante do BIG 2022
+
+Para não estender demais um artigo tão pessoal que já pode ter desamarrado a atenção do leitor, desejo concluir com algumas das coisas que aprendi no evento que foram de fato as mais importantes.
+
+Primeiramente tenho que citar algo que tocou o meu coração e me motivou muito:
+
+> A acessibilidade que o festival trouxe para pessoas que não têm condições de jogar videogame.
+
+É fato que no Brasil o hobby de jogar videogame é um luxo que poucas pessoas são capazes de ter, e, como monitor, ver o sorriso de um garoto jogando pela primeira vez, ou tendo seu primeiro contato com um PS5 ou VR na vida foi transformador para minha pessoa.
+
+Esse momento me trouxe uma epifania e me fez enxergar a importância do que estou fazendo. É isso que quero trazer para as pessoas, essa felicidade incondicional que é permitida através da tecnologia.
+
+Mais do que isso, em minha carreira, defenderei a luta de trabalhar para tornar os games mais acessíveis, seja estudando maneiras mais inteligentes de produzir ou apenas fortalecendo o mercado nacional, mas essa experiência única acendeu minha empolgação e motivou a continuar o caminho pelo Game Design.
+
+Por fim, gostaria de citar que algo muito importante para mim foi a sensação de gratidão pelo evento. Quando olho para meu perfil profissional, como um jovem que acabou de entrar no mercado de games, sinto-me muitas vezes perdido em meio às oportunidades e caminhos possíveis para seguir, mas poder ter contato com pessoas da área, com pessoas de outras áreas e com o público do evento, me permite traçar uma estratégia melhor para tornar meu sonho possível. Aprendi muito, vivi muito e conheci muito, e espero que tenha conseguido tornar a experiência de alguém um pouco melhor durante o BIG 2022.
+
+Para aqueles que participaram do festival, obrigado, vocês me ajudaram a ter essa experiência enriquecedora.
+
+Para aqueles que estão lendo e não participaram: Aguardo vocês no ano que vem, como Game Designer.`,
+   // English version (switched with the language buttons in the article popup)
+   en:{title:"What I Learned as a Monitor at BIG 2022",
+       subtitle:"Lessons in design, communication and accessibility from inside the BIG Festival",
+       caption:"With Shuhei Yoshida at the BIG Festival.",
+       body:`BIG Festival is a Brazilian festival that aims to promote and support the national games industry, as well as independent developers and studios. It does this through publicity, business rounds with sponsors inside the event, and talks about Game Design philosophies. Of course, over the years BIG has become a more popular event, and this has brought a broader target audience. This year, BIG welcomed major supporters such as Magazine Luiza and Omelete (which is in fact the biggest promoter of nerd and geek culture, bringing content of international quality to the Brazilian public on social media).
+
+There were some contradictions regarding the 2022 edition of BIG. The fact that it turned more toward the “mainstream” bothered some people, who said this took the focus and support away from independent developers, which is the purpose of the event.
+
+However, as a junior game developer and an enthusiast of games journalism, I have a firm opinion that the importance of this event for my career as a Game Designer is something I will be grateful for for the rest of my life, and throughout this article I will explain why.
+
+---
+
+## What did I do at BIG 2022?
+
+I began studying Game Design at Anhembi Morumbi University in January 2021. Since then, my dream has naturally been to find an internship or to enter the national market that I admire so much. So when the opportunity to work at BIG came up, I promptly applied, and after a selection process I was called up to work at the festival as a Super Monitor.
+
+This role has a fancy name, but the main job was to help people set up games and devices and to answer questions about the equipment.
+
+Of course, with my passion for video games, this became much bigger inside me. I made an effort to learn about every game on display, because I wanted to spread the culture of game design whenever there was an opportunity. I would explain to someone, for example, that “Solar Ash” was a game focused on its audiovisual narrative, made by a growing independent studio and published by Annapurna Interactive.
+
+I interacted with people to try to show the beauty behind the simple act of playing, because after all, that is what BIG is about. I am happy to say that this gave me incredible experiences that I will never be able to forget, and I will describe some of them in the topics below.
+
+Besides monitoring the games on display, I was put in charge of managing some of the talks and events that took place in the auditorium, such as the CBCS (the Brazilian Counter-Strike Circuit) and, above all, the big games awards ceremony.
+
+As I am a Final Fantasy fanatic, I did not miss the chance to ask to help in the auditorium during the talk by Takashi Tokita (Lead Designer of Final Fantasy 4, Chrono Trigger and Live A Live).
+
+---
+
+## What did I learn as a Designer?
+
+Observing, talking to and interpreting the people who were playing allowed me to build up a large repertoire of data about people's feedback: which kinds of gameplay are appealing right away, and which kinds of mechanics take a little longer to catch on; which people are more interested in smaller, experimental games, and which are more interested in the big brands.
+
+All of this information lets me improve my own work and prepares me for the contact with users, which is very important in a game's production process.
+
+On my training day (the day before the opening), I had the chance to play every game on display, both from the big publishers present at the event and from Brazilian developers and students.
+
+This “overdose” of content greatly enriched my references. I was introduced to innovative mechanics, such as a game that uses the iPhone's face reader as input, and to the game “Welcome Back,” whose demo was so polished that it hooked me from beginning to end, and developed its narrative so masterfully that I looked the game up on Steam as soon as I got home. This kind of contact with innovation and experimentation is not possible at home, no matter how much you research.
+
+The main legacy I took away as a designer was the message that this dream is possible. Seeing the beauty of playing games made by people, for people and with people motivated me a lot to continue on this journey. The people playing there are like me: they love games. But more than that, the people exhibiting their games are also like me: they love making games, and they love the happiness they can bring with the few minutes of interactivity they shared with the audience.
+
+---
+
+## What did I learn about communication?
+
+Talking to people is the most important skill we can develop, both personally and professionally. What sets us apart from Neanderthals is the ability to live in society and cooperate, so the monitor job let me practice, learn and exercise communication in a way I never had before.
+
+I have always been passionate about literature, writing and composition, especially the journalism of the niche I belong to (games and pop culture). Being able to talk to people about the games they like, what they enjoyed at the event and what they played, and to get to know them, was very important for my development.
+
+As a writer, text is always supported by one's references and cultural background, and the amount of human contact provided by events like BIG, which put many people with a shared interest in a common environment, greatly enriches one's erudition and favors one's repertoire.
+
+I feel this experience gave me social knowledge that few people have had the opportunity to obtain. In addition, by working in the organization of the event, I had contact with people from production and development, which let me learn more about several areas and increased my knowledge of both the games niche and many other professions.
+
+I also had the chance to meet great personal references (or idols) related to communication. I got to meet the communication genius Felipe Goldenberg (“Goldenboy”), who currently works at Canaltech, a very important technology outlet. I also met Angelo Sarmiento (Product Analyst at Omelete Company), whom I had already seen in productions by The Enemy (Omelete's games-focused outlet). Being able to talk, even briefly, with great inspirations of mine in the field of games journalism also motivated me to write this very article, in order to share my experiences with other people.
+
+The BIG experience made clear to me the importance that these and other influencers have for the industry. They are often criticized for being in the “game of capitalism” and for bowing to sponsorships or biased promotion. But the beauty of the work of bringing information about something we love, in an attempt to unite people through a shared interest, is far greater than these fallacies, and in the end, what they do moves the economy and the motivation of the people in the games market.
+
+I bring my personal experience as an example. If I had not consumed the content produced by outlets like Omelete, Nautilus, The Enemy, IGN and others, I probably would never have become interested in Game Design or seen it as a profession.
+
+---
+
+## The most important thing about BIG 2022
+
+So as not to stretch out an article this personal, which may already have lost the reader's attention, I want to conclude with some of the things I learned at the event that were in fact the most important.
+
+First, I have to mention something that touched my heart and motivated me a lot:
+
+> The accessibility the festival brought to people who cannot afford to play video games.
+
+It is a fact that in Brazil, playing video games is a luxury that few people can afford, and, as a monitor, seeing the smile of a boy playing for the first time, or having his first contact with a PS5 or VR in his life, was transformative for me.
+
+That moment brought me an epiphany and made me see the importance of what I am doing. This is what I want to bring to people: this unconditional happiness made possible through technology.
+
+More than that, throughout my career I will fight to make games more accessible, whether by studying smarter ways to produce or simply by strengthening the national market, but this unique experience sparked my excitement and motivated me to continue on the path of Game Design.
+
+Finally, I would like to mention that something very important to me was the feeling of gratitude for the event. When I look at my professional profile, as a young person who has just entered the games market, I often feel lost among the possible opportunities and paths to follow, but being in contact with people from the field, with people from other fields and with the audience of the event lets me draw up a better strategy to make my dream possible. I learned a lot, lived a lot and met a lot, and I hope I managed to make someone's experience a little better during BIG 2022.
+
+To those who took part in the festival: thank you, you helped me have this enriching experience.
+
+To those of you who are reading and did not take part: I look forward to seeing you next year, as a Game Designer.`}}
+];
+
+/* ============ EDIT HERE: contact details (shown at the end of the home page) ============ */
+const CONTACT = {
+  linkedin: {url:"https://www.linkedin.com/in/gustavo-mondini-35ba6a17b/", text:"Gustavo Mondini"},
+  emailUser: "gmondini7", emailHost: "gmail.com",     // kept in two parts so simple bots do not collect the address
+  whatsapp: {url:"https://wa.me/5511963256749", text:"+55 (11) 96325-6749"}   // wa.me opens a chat with this number directly
+};
+// Icons drawn for this site (simple outline style, they inherit the text color)
+const ICON = {
+  linkedin: '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7.5 10.5V17M11.5 17v-6.5M11.5 13.6c0-1.9 1.1-3.1 2.7-3.1 1.7 0 2.8 1.1 2.8 3.1V17"/><circle cx="7.5" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></svg>',
+  email: '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7.5l8 5.8 8-5.8"/></svg>',
+  whatsapp: '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2a8.8 8.8 0 00-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1012 3.2z"/><g transform="translate(6.4 6.4) scale(.5)"><path stroke-width="3.4" d="M5.2 4h3l1.5 4-2 1.4a11.5 11.5 0 005 5l1.4-2 4 1.5v3A2 2 0 0116 19C9.4 19 4 13.6 4 7a2 2 0 011.2-3z"/></g></svg>'
+};
+
+/* ============ EDIT HERE: professional history (home page) ============ */
+const HISTORY = [
+  {date:"2024 – Present", title:"Game Designer (Level Design Specialist)", company:"Hermit Crab Studio", paras:[
+    "At Hermit Crab, I focus primarily on Game Design, owning the creation and development of core gameplay systems, progression and in-game economies. I am responsible for delivering complete GDDs and for defining mechanics, dynamics and a player experience aligned with product goals, KPIs and monetization strategies.",
+    "My work is driven by a balance between player-centric design and commercial performance, creating systems that support retention, engagement and long-term sustainability. I operate in fast-paced UGC and Metaverse environments within Fortnite, contributing to high-impact projects and partnerships.",
+    "While Game Design is my primary focus and long-term career path, I continue to draw on my Level Design background to ensure strong gameplay flow, readability and effective implementation within the playable space. I work mainly with Unreal Engine and Unreal Editor for Fortnite."]},
+  {date:"2024", title:"Tech Artist and VFX Artist", company:"Orbit Studio", paras:[
+    "My curiosity led me to start developing simple shaders and particle systems at Orbit Studio, and I quickly fell in love with the field. After nearly a year of learning, I am able to create and understand shaders and visual effects using Shader Graph, the Particle System, VFX Graph and basic shader language.",
+    "I have also learned about graphics and performance optimization, which has made me more efficient and benefits level design by enabling richer environments. I continue to study to improve my skills and deliver exceptional results."]},
+  {date:"2022 – 2024", title:"Level Designer", company:"Orbit Studio", paras:[
+    "At Orbit Studio, I worked as a Level Designer, handling several critical tasks in game development. My responsibilities included camera setup and using Cinemachine to create impactful visual experiences. I deepened my expertise in Unity 2D and 3D, performing level prototyping and blockouts, as well as set dressing and environment design.",
+    "I was also involved in difficulty balancing and enemy placement, ensuring that each level offered a fair and engaging challenge for players.",
+    "I feel immensely honored to have learned from the designers behind Retro Machina. They have been not only outstanding mentors but also great friends throughout the years, significantly enriching my journey in game design."]},
+  {date:"2021 – 2022", title:"Game Designer and Narrative Designer", company:"Rataiada Studio", paras:[
+    "At Rataiada Studio, I worked on narrative design and game design for three game jam projects. These projects were my first steps on itch.io and allowed me to meet incredible people in the field. I am very grateful to Rataiada and take great pride in the projects we developed together."]},
+  {date:"2018 – 2022", title:"Marketing Specialist", company:"Sal Digital", paras:[
+    "As a Digital Marketing Sponsorship Specialist, I developed and managed digital advertising campaigns, focusing on creating and optimizing target audiences on Facebook and LinkedIn Ads. My role included crafting sponsorship strategies, negotiating with partners and analyzing performance to maximize return on investment.",
+    "I also managed budgets and kept up with industry trends."]}
+];
+
+/* ============ EDIT HERE: partner logos (shown on the home page) ============
+   logo: file inside img/partners/ (PNG or SVG with transparent background).
+   bg: optional chip background color (needed for white logos). If the file is missing, the company name is shown as text. */
+const PARTNERS = [
+  {name:"Ubisoft", logo:"img/partners/ubisoft.png", project:"sportia", bg:"#2a252b"},
+  {name:"Atari", logo:"img/partners/atari.png", project:"haunted-house"},
+  {name:"Play on Worlds", logo:"img/partners/play-on-worlds.png", project:"ebenezer"},
+  {name:"Twin Sails Interactive", logo:"img/partners/twin-sails-interactive.png", project:"sky-dust"}
+];
+
+/* ============ EDIT HERE: About Me ============ */
+const ABOUT = {
+  intro: "I'm Gustavo Mondini, a Brazilian game designer with a Bachelor's degree in Game Design from Anhembi Morumbi University, class of 2025.",
+  more: [
+    "Before games, I was studying environmental engineering and working in digital marketing to pay for my studies. When the 2020 lockdown forced me to pause my degree, I finally had time to reflect, and one thing stood out: games had been with me through every sad and happy moment of my life.",
+    "After a cathartic moment in which a game brought me to tears, I realized I wanted to do the same for other people through my own art. In 2021 I decided to leave everything behind to become a game designer, enrolled at university and started taking part in game jams."
+  ],
+  facts: [
+    ["Nationality", "Brazilian"],
+    ["Education", "B.A. in Game Design, Anhembi Morumbi University (2025)"],
+    ["Focus", "Level Design, Game Design and Production"]
+  ]
+};
+
+const app = document.getElementById("app");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// Image viewer: click an image to enlarge it; the Close button, Esc or a click outside shrinks it back
+let lb = null, lbReturn = null;
+function closeLightbox(){
+  if (!lb) return;
+  lb.remove(); lb = null; document.body.style.overflow = "";
+  document.removeEventListener("keydown", lbKeys);
+  if (lbReturn && lbReturn.focus) lbReturn.focus({preventScroll:true});
+}
+function lbKeys(e){
+  if (!lb) return;
+  if (e.key === "Escape") { e.preventDefault(); closeLightbox(); return; }
+  if (e.key === "Tab") { const b = [...lb.querySelectorAll("button")], i = b.indexOf(document.activeElement); e.preventDefault(); b[(i + (e.shiftKey ? -1 : 1) + b.length) % b.length].focus(); }
+}
+function openLightbox(src, caption){
+  closeLightbox();
+  lbReturn = document.activeElement;
+  lb = document.createElement("div");
+  lb.className = "lb"; lb.setAttribute("role","dialog"); lb.setAttribute("aria-modal","true"); lb.setAttribute("aria-label","Image viewer");
+  lb.innerHTML = '<div class="lb-bar"><span class="lb-cap"></span><span class="lb-btns"><button type="button" class="lb-btn" data-zoom>Zoom in</button><button type="button" class="lb-btn" data-close>✕ Close</button></span></div><div class="lb-stage"><img alt=""></div>';
+  const img = lb.querySelector("img"), stage = lb.querySelector(".lb-stage"), zoom = lb.querySelector("[data-zoom]");
+  img.src = src; img.alt = caption || ""; lb.querySelector(".lb-cap").textContent = caption || "";
+  const toggle = () => { const full = lb.classList.toggle("full"); zoom.textContent = full ? "Zoom out" : "Zoom in"; };
+  zoom.addEventListener("click", toggle); img.addEventListener("click", toggle);
+  lb.querySelector("[data-close]").addEventListener("click", closeLightbox);
+  stage.addEventListener("click", e => { if (e.target === stage) closeLightbox(); });
+  document.body.appendChild(lb); document.body.style.overflow = "hidden";
+  document.addEventListener("keydown", lbKeys);
+  lb.querySelector("[data-close]").focus({preventScroll:true});
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest("a.zoom");
+  if (!a) return;
+  e.preventDefault();
+  const im = a.querySelector("img");
+  openLightbox(a.href, im ? im.alt : "");
+});
+
+function cardHTML(p){
+  // The colored gradient shows if the image is missing or fails to load.
+  const img = p.cover ? `<img class="cover" src="${esc(p.cover)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : "";
+  const small = p.sub ? esc(p.sub) : `${esc(p.studio)}<br>${esc(p.partnerLabel)}: ${esc(p.partner)}${p.locked ? (p.external ? "<br>View on Steam ↗" : "<br>Details coming soon") : ""}`;
+  const label = `<div class="name"><span>${p.titled ? "" : esc(p.title)}<small>${small}</small></span></div>`;
+  const bg = `background:linear-gradient(160deg, ${p.color}, #0b0b0d)`;
+  const cls = "card" + (p.cover ? "" : " nocover");
+  if (p.external) return `<a class="${cls}" href="${esc(p.external)}" target="_blank" rel="noopener" aria-label="${esc(p.title)} (opens the Steam page)" style="${bg}">${img}${label}</a>`;
+  return p.locked
+    ? `<div class="${cls} locked" role="img" aria-label="${esc(p.title)} (details coming soon)" style="${bg}">${img}${label}</div>`
+    : `<a class="${cls}" href="#/${p.slug}" aria-label="${esc(p.title)}" style="${bg}">${img}${label}</a>`;
+}
+
+function projectButton(p){
+  // One button per project: partner/publisher logo on the left, project name and relationship on the right.
+  const pt = PARTNERS.find(x => x.project === p.slug) || {name:p.partner, logo:""};
+  const chip = `<span class="chip"${pt.bg ? ` style="background:${esc(pt.bg)}"` : ""}><img src="${esc(pt.logo)}" alt="${esc(pt.name)}" loading="lazy" onerror="this.replaceWith(document.createTextNode(this.alt))"></span>`;
+  const text = `<span class="ptext"><span class="pname">${esc(p.title)}</span><span class="prole">${esc(p.partnerLabel)}: ${esc(p.partner)}${p.locked ? (p.external ? " · View on Steam" : " · Details coming soon") : ""}</span></span>`;
+  const arrow = `<svg class="go" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  if (p.external) return `<li><a class="pbtn" href="${esc(p.external)}" target="_blank" rel="noopener" aria-label="${esc(p.title)} (opens the Steam page)">${chip}${text}${arrow}</a></li>`;
+  return p.locked
+    ? `<li><div class="pbtn locked" aria-label="${esc(p.title)} (details coming soon)">${chip}${text}</div></li>`
+    : `<li><a class="pbtn" href="#/${esc(p.slug)}" aria-label="${esc(p.title)}">${chip}${text}${arrow}</a></li>`;
+}
+
+const CHEV_L = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CHEV_R = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+// the looping rail repeats its cards; the repeats are hidden from screen readers and from the Tab key
+function markRailDuplicates(){
+  app.querySelectorAll(".track").forEach(t => { const n = +t.dataset.n; t.querySelectorAll(".card").forEach((c,i) => { if (i >= n) { c.setAttribute("aria-hidden","true"); c.tabIndex = -1; } }); });
+}
+function railHTML(list, label, cls, render){
+  const set = list.map(render || cardHTML).join("");
+  return `<div class="railwrap${cls ? " " + cls : ""}" role="group" aria-roledescription="carousel" aria-label="${esc(label)}">
+    <button type="button" class="arrow prev" aria-label="Previous">${CHEV_L}</button>
+    <div class="rail"><div class="track" data-n="${list.length}">${set.repeat(6)}</div></div>
+    <button type="button" class="arrow next" aria-label="Next">${CHEV_R}</button>
+  </div>`;
+}
+
+// Project carousels: auto-scroll in a loop; swipe on touch screens, arrows on desktop. Autoplay pauses on hover, touch and keyboard focus.
+function initRail(){
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const SETS = 6, SPEED = 0.06;                       // px per ms (about 60 px per second)
+  app.querySelectorAll(".railwrap").forEach(wrap => {
+    const rail = wrap.querySelector(".rail"), track = wrap.querySelector(".track");
+    const period = () => track.scrollWidth / SETS;    // width of one full set of cards
+    const step = () => { const c = rail.querySelector(".card"); return c ? c.getBoundingClientRect().width + 20 : 340; };
+    let pos = period(), last = 0, raf = 0, hold = 0, hovering = false, touching = false, focused = false;
+    rail.scrollLeft = pos;
+    const keepInRange = () => { const p = period(); if (rail.scrollLeft >= 3*p) rail.scrollLeft -= p; else if (rail.scrollLeft < p) rail.scrollLeft += p; };
+    const tick = t => {
+      const dt = Math.min(t - last, 50); last = t;
+      if (reduce || hovering || touching || focused || t < hold) { pos = rail.scrollLeft; if (t >= hold) keepInRange(); }
+      else { pos += dt * SPEED; if (pos >= 3*period()) pos -= period(); rail.scrollLeft = pos; }
+      raf = requestAnimationFrame(tick);
+    };
+    const go = dir => { hold = performance.now() + 3000; rail.scrollBy({left: dir * step(), behavior: reduce ? "auto" : "smooth"}); };
+    wrap.querySelector(".arrow.prev").addEventListener("click", () => go(-1));
+    wrap.querySelector(".arrow.next").addEventListener("click", () => go(1));
+    // only a real mouse pointer pauses the autoplay (taps on touch screens must not leave it paused)
+    wrap.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") hovering = true; });
+    wrap.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") hovering = false; });
+    rail.addEventListener("touchstart", () => touching = true, {passive:true});
+    const endTouch = () => { touching = false; hold = performance.now() + 2500; };
+    rail.addEventListener("touchend", endTouch, {passive:true});
+    rail.addEventListener("touchcancel", endTouch, {passive:true});
+    wrap.addEventListener("focusin", e => { focused = e.target.matches(":focus-visible"); });
+    wrap.addEventListener("focusout", () => focused = false);
+    raf = requestAnimationFrame(t => { last = t; tick(t); });
+    cleanups.push(() => cancelAnimationFrame(raf));
+  });
+}
+
+// "Read More" / "Close" drop down (used in About Me and in project overviews)
+const CHEV_DN = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CHEV_UP = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 15l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function moreHTML(id, paras){
+  if (!paras || !paras.length) return "";
+  return `<button type="button" class="morebtn" data-open="${id}" aria-expanded="false" aria-controls="${id}">Read More ${CHEV_DN}</button>
+    <div class="more" id="${id}" inert><div class="moreinner">${paras.map(t => `<p>${esc(t)}</p>`).join("")}<button type="button" class="morebtn" data-close="${id}">Close ${CHEV_UP}</button></div></div>`;
+}
+function initMore(){
+  app.querySelectorAll("[data-open]").forEach(openBtn => {
+    const id = openBtn.dataset.open, more = document.getElementById(id), closeBtn = app.querySelector(`[data-close="${id}"]`);
+    if (!more || !closeBtn) return;
+    const toggle = on => {
+      more.classList.toggle("open", on);
+      if (on) more.removeAttribute("inert"); else more.setAttribute("inert", "");
+      openBtn.setAttribute("aria-expanded", String(on)); openBtn.hidden = on;
+      if (on) { const p = more.querySelector("p"); p.tabIndex = -1; p.focus({preventScroll:true}); } else openBtn.focus({preventScroll:true});
+    };
+    openBtn.addEventListener("click", () => toggle(true));
+    closeBtn.addEventListener("click", () => toggle(false));
+  });
+}
+
+// Category page (e.g. Academic Games): one section per project
+const slugify = t => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+function audioList(list, label){
+  if (!list || !list.length) return "";
+  return `${label ? `<p class="alabel">${esc(label)}</p>` : ""}<ul class="audiolist">${list.map(a => `<li><span class="atitle">${esc(a.title)}</span>${a.src
+    ? `<audio controls preload="none" src="${esc(a.src)}"></audio>` : `<span class="soonbox">Audio coming soon</span>`}</li>`).join("")}</ul>`;
+}
+function soundcloud(sc){
+  if (!sc) return "";
+  const src = "https://w.soundcloud.com/player/?url=" + encodeURIComponent(sc.url) + "&color=%23f6a9cf&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false";
+  return `<iframe class="scframe" title="${esc(sc.title)}" loading="lazy" src="${src}"></iframe><p class="sclink"><a href="${esc(sc.url)}" target="_blank" rel="noopener">Open the playlist on SoundCloud ↗</a></p>`;
+}
+function sectionHTML(c, sec){
+  const id = "sec-" + c.slug + "-" + slugify(sec.title);
+  if (sec.soon) return `<section class="acad"><h2>${esc(sec.title)}</h2><p class="soon">Details coming soon.</p></section>`;
+  const kit = mediaKit({title: sec.title, color: c.color});
+  const img = sec.cover
+    ? `<img src="${esc(sec.cover)}" alt="${esc(sec.title)} cover art" width="${sec.coverW}" height="${sec.coverH}">`
+    : `<span class="phtext">${esc(sec.title)}<br>Cover coming soon</span>`;
+  const ccls = "coverlink" + (sec.cover ? "" : " ph");
+  const cbg = sec.coverBg ? ` style="background:${esc(sec.coverBg)}"` : "";
+  const cover = sec.link
+    ? `<a class="${ccls}"${cbg} href="${esc(sec.link)}" target="_blank" rel="noopener" aria-label="${esc(sec.linkLabel || "Open")}: ${esc(sec.title)}">${img}<span class="cl">${esc(sec.linkLabel || "Open")} ↗</span></a>`
+    : `<div class="${ccls}"${cbg}>${img}</div>`;
+  const button = sec.link ? `<p><a class="steam" href="${esc(sec.link)}" target="_blank" rel="noopener">${esc(sec.linkLabel || "Open")} ↗</a></p>` : "";
+  const overview = sec.overview ? `<p class="lead">${esc(sec.overview.intro)}</p>${moreHTML(id + "-more", sec.overview.more)}` : "";
+  const reel = sec.reel && sec.reel.length ? `<div class="cell">${kit.carouselOf(sec.reel, sec.title)}</div>` : "";
+  const video = sec.youtube ? kit.oneVideo(sec.youtube.title, sec.youtube.id) : "";
+  const factRows = [["Genre", sec.genre], [sec.dateLabel || "Released", sec.date], ["Engine", sec.engine], ["My roles", sec.roles]].filter(r => r[1]);
+  const facts = factRows.length ? `<dl class="aboutfacts">${factRows.map(([k,v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>` : "";
+  const cast = sec.cast ? `<div class="cast" role="group" aria-label="Character art"><ul>${sec.cast.items.map((c,k) => `<li style="--h:${c.h}px;--dy:${c.dy || 0}px;--i:${k}"><span class="sprite"><img src="${esc(c.src)}" alt="${esc(c.alt)}" loading="lazy"></span></li>`).join("")}</ul>${sec.cast.credit ? `<p class="castcredit">${esc(sec.cast.credit)}</p>` : ""}</div>` : "";
+  const sm = sec.summaries || {};
+  const role = (t, text, extra) => text ? `<div class="role"><h3>${esc(t)}</h3><p>${esc(text)}</p>${extra || ""}</div>` : "";
+  const roles = [role("Level Design", sm.level), role("Game Design", sm.game), role("Narrative Design", sm.narrative), ...(sm.other || []).map(o => role(o.title, o.text)), role("VFX / Tech Art", sm.vfx), role("Sound Design", sm.sound, audioList(sm.audio, sm.audioLabel) + soundcloud(sm.soundcloud))].join("");
+  return `<section class="acad">
+    <h2>${esc(sec.title)}</h2>
+    <div class="acadtop">
+      <div class="acadcover">${cover}${button}</div>
+      <div class="acadinfo">
+        ${facts}
+        ${overview}
+      </div>
+    </div>
+    ${cast}
+    ${reel && video ? `<div class="media acadmedia">${reel}${video}</div>` : reel ? `<div class="featured${sec.reelSmall ? " small" : ""} acadmedia">${kit.carouselOf(sec.reel, sec.title)}</div>` : video ? `<div class="featured acadmedia">${video}</div>` : ""}
+    ${roles ? `<div class="rolegrid">${roles}</div>` : ""}
+  </section>`;
+}
+// Cast sprites rise into place the first time they scroll into view
+function initReveal(){
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  app.querySelectorAll(".cast").forEach(el => {
+    if (reduce || !("IntersectionObserver" in window)) { el.classList.add("in"); return; }
+    const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { el.classList.add("in"); io.disconnect(); } }, {threshold: 0.2});
+    io.observe(el); cleanups.push(() => io.disconnect());
+  });
+}
+
+function ugcHTML(c){
+  const u = c.ugc, kit = mediaKit({title: u.title, color: c.color});
+  const ext = (href, label) => `<a class="steam" href="${esc(href)}" target="_blank" rel="noopener">${esc(label)} ↗</a>`;
+  const kpis = `<div class="kpistrip">${u.highlights.map(h => `<div class="kpi"><b>${esc(h.value)}</b><span class="kl">${esc(h.label)}</span><span class="kn">${esc(h.note)}</span></div>`).join("")}</div>
+    <p class="kfoot">CCU = concurrent users.</p>`;
+  const prods = `<div class="prodgrid">${u.products.map(pr => `<article class="prod">
+      <h3>${esc(pr.title)}</h3><p class="pp">${esc(pr.partner)}</p>
+      <div class="pk">${pr.kpis.map(([v,l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div>
+      ${pr.focus ? `<p class="pf">${esc(pr.focus)}</p>` : ""}
+      <ul>${pr.points.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      ${pr.link ? `<p>${ext(pr.link, "Open the map on Fortnite.gg")}</p>` : ""}</article>`).join("")}</div>`;
+  const others = `<ul class="pills">${u.others.map(o => `<li>${o.link ? `<a href="${esc(o.link)}" target="_blank" rel="noopener">${esc(o.title)} ↗</a>` : `<span>${esc(o.title)}</span>`}</li>`).join("")}</ul>`;
+  return `<section class="acad ugc">
+    <h2>${esc(u.title)}</h2>
+    <p class="lead">${esc(u.lead)}</p>
+    ${kpis}
+    <h3 class="ugch">Shipped products: numbers and performance</h3>
+    ${prods}
+    <h3 class="ugch">My role</h3>
+    ${u.intro.map(t => `<p>${esc(t)}</p>`).join("")}
+    ${moreHTML("ugc-more", u.more)}
+    <h3 class="ugch">Intro and RLDD</h3>
+    <p>${esc(u.rldd.text)}</p>
+    <div class="featured">${kit.carouselOf(u.rldd.images, "RLDD")}</div>
+    <h3 class="ugch">Key experience</h3>
+    <ul class="tags">${u.experience.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+    <h3 class="ugch">Other products</h3>
+    <p>${esc(u.othersIntro)}</p>
+    ${others}
+    ${u.trailer ? `<div class="featured trailerbox"><video controls playsinline preload="metadata" poster="${esc(u.trailer.poster)}" src="${esc(u.trailer.src)}" aria-label="${esc(u.trailer.title)}"></video><p class="vcap"><span class="vtitle">${esc(u.trailer.title)}</span><a href="${esc(u.trailer.link)}" target="_blank" rel="noopener">Open the map on Fortnite.gg ↗</a></p></div>` : ""}
+  </section>`;
+}
+/* ============ Article editor ============
+   Hidden: click the small logo at the bottom of the Articles page and enter the password.
+   The password only hides the editor. Publishing needs a GitHub token that lives in the author's browser. */
+const EDITOR_HASH = "421fbbe78d03bbab34df0f67db6d437335610e1040941496f9dcc8e4e913bb61";
+const ED_DRAFTS = "mondini.editor.drafts.v1", ED_CFG = "mondini.editor.cfg.v1";
+
+function sha256Hex(str){
+  const maxWord = Math.pow(2, 32), utf8 = unescape(encodeURIComponent(str)), words = [];
+  const bitLen = utf8.length * 8;
+  for (let i = 0; i < utf8.length; i++) words[i >> 2] |= utf8.charCodeAt(i) << (24 - (i % 4) * 8);
+  words[bitLen >> 5] |= 0x80 << (24 - bitLen % 32);
+  words[(((bitLen + 64) >> 9) << 4) + 15] = bitLen;
+  const K = [], H = [];
+  const isPrime = n => { for (let d = 2; d * d <= n; d++) if (n % d === 0) return false; return true; };
+  for (let c = 0, n = 2; c < 64; n++) if (isPrime(n)) { if (c < 8) H[c] = (Math.pow(n, 1/2) % 1 * maxWord) | 0; K[c++] = (Math.pow(n, 1/3) % 1 * maxWord) | 0; }
+  const w = [];
+  for (let j = 0; j < words.length; j += 16) {
+    let [a, b, c, d, e, f, g, h] = H;
+    const old = H.slice(0, 8);
+    for (let i = 0; i < 64; i++) {
+      if (i < 16) w[i] = words[j + i] | 0;
+      else { const g0 = w[i-15], g1 = w[i-2];
+        w[i] = (w[i-16] + (((g0>>>7)|(g0<<25)) ^ ((g0>>>18)|(g0<<14)) ^ (g0>>>3)) + w[i-7] + (((g1>>>17)|(g1<<15)) ^ ((g1>>>19)|(g1<<13)) ^ (g1>>>10))) | 0; }
+      const t1 = (h + (((e>>>6)|(e<<26)) ^ ((e>>>11)|(e<<21)) ^ ((e>>>25)|(e<<7))) + ((e & f) ^ (~e & g)) + K[i] + w[i]) | 0;
+      const t2 = ((((a>>>2)|(a<<30)) ^ ((a>>>13)|(a<<19)) ^ ((a>>>22)|(a<<10))) + ((a & b) ^ (a & c) ^ (b & c))) | 0;
+      h = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
+    }
+    const nv = [a, b, c, d, e, f, g, h];
+    for (let i = 0; i < 8; i++) H[i] = (old[i] + nv[i]) | 0;
+  }
+  return H.map(x => ("00000000" + (x >>> 0).toString(16)).slice(-8)).join("");
+}
+
+// Keeps only simple inline formatting (bold, italic, underline, strike, code, links). Everything else is removed.
+function sanitizeInline(html){
+  const ALLOWED = {b:1, strong:1, i:1, em:1, u:1, s:1, strike:1, del:1, code:1, br:1, a:1};
+  return String(html || "").replace(/<!--[\s\S]*?-->/g, "").replace(/(<\/?[a-zA-Z][^>]*>)|(<)|([^<]+)/g, (m, tag, lt, txt) => {
+    if (txt !== undefined) return txt;
+    if (lt) return "&lt;";
+    const mm = /^<(\/?)([a-zA-Z][a-zA-Z0-9]*)([^>]*)>$/.exec(tag);
+    if (!mm) return "";
+    const closing = mm[1] === "/", name = mm[2].toLowerCase();
+    if (!ALLOWED[name]) return "";
+    if (closing) return name === "br" ? "" : "</" + name + ">";
+    if (name === "a") {
+      const h = /href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(mm[3]);
+      let u = h ? (h[1] !== undefined ? h[1] : h[2] !== undefined ? h[2] : h[3]) : "";
+      u = u.replace(/&amp;/g, "&").trim();
+      if (!/^(https?:\/\/|mailto:)/i.test(u)) return "<a>";
+      return '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">';
+    }
+    return "<" + name + ">";
+  });
+}
+
+// Article body made of blocks (written in the editor)
+function articleBlocksHTML(blocks){
+  const out = []; let i = 0;
+  const inl = h => sanitizeInline(h);
+  while (i < blocks.length) {
+    const b = blocks[i];
+    if (b.type === "ul" || b.type === "ol" || b.type === "todo") {
+      const kind = b.type, items = [];
+      while (i < blocks.length && blocks[i].type === kind) { items.push(blocks[i]); i++; }
+      if (kind === "todo") out.push('<ul class="todos">' + items.map(x => `<li class="${x.checked ? "done" : ""}"><span class="tick" aria-hidden="true">${x.checked ? "✓" : ""}</span><span>${inl(x.html)}</span></li>`).join("") + "</ul>");
+      else out.push(`<${kind}>` + items.map(x => `<li>${inl(x.html)}</li>`).join("") + `</${kind}>`);
+      continue;
+    }
+    i++;
+    if (b.type === "h1") out.push(`<h2 class="lvl1">${inl(b.html)}</h2>`);
+    else if (b.type === "h2") out.push(`<h3 class="lvl2">${inl(b.html)}</h3>`);
+    else if (b.type === "h3") out.push(`<h4 class="lvl3">${inl(b.html)}</h4>`);
+    else if (b.type === "quote") out.push(`<blockquote>${inl(b.html)}</blockquote>`);
+    else if (b.type === "callout") out.push(`<aside class="callout"><span class="ci" aria-hidden="true">i</span><div>${inl(b.html)}</div></aside>`);
+    else if (b.type === "code") out.push(`<pre><code>${esc(b.text || "")}</code></pre>`);
+    else if (b.type === "hr") out.push('<hr class="adiv">');
+    else if (b.type === "img") { const src = b.dataUrl || b.src; if (src) out.push(`<figure class="artfig"><img src="${esc(src)}" alt="${esc((b.caption || "").replace(/<[^>]*>/g, ""))}" loading="lazy">${b.caption ? `<figcaption>${inl(b.caption)}</figcaption>` : ""}</figure>`); }
+    else if (inl(b.html).replace(/<br>|&nbsp;|\s/g, "")) out.push(`<p>${inl(b.html)}</p>`);
+  }
+  return out.join("");
+}
+
+/* ---------- remote articles (published from the editor) ---------- */
+async function loadRemoteArticles(){
+  try {
+    const r = await fetch("articles/index.json?v=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) return false;
+    const data = await r.json(), list = Array.isArray(data) ? data : (data.articles || []);
+    list.forEach(a => { a._remote = true; const i = ARTICLES.findIndex(x => x.id === a.id); if (i >= 0) ARTICLES[i] = a; else ARTICLES.push(a); });
+    return list.length > 0;
+  } catch (e) { return false; }
+}
+function articleItemsHTML(){
+  const list = ARTICLES.slice().sort((x, y) => (y.iso || "").localeCompare(x.iso || ""));
+  const code = a => a.lang === "pt-BR" ? "PT" : a.lang === "en" ? "EN" : String(a.lang || "").slice(0, 2).toUpperCase();
+  return list.map(a => `<li><button type="button" class="art" data-art="${esc(a.id)}" aria-label="Read the article: ${esc(a.title)}">
+      <img src="${esc(a.card)}" alt="" loading="lazy">
+      <span class="artmeta"><span class="pills2"><span class="pill">${esc(code(a))}</span>${a.en ? '<span class="pill">EN</span>' : ""}</span><b>${esc(a.title)}</b><time>${esc(a.date)}</time></span>
+    </button></li>`).join("") + `<li><div class="art soonart" aria-hidden="true"><span>More articles<br>coming soon</span></div></li>`;
+}
+function bindArticleButtons(){
+  app.querySelectorAll("[data-art]").forEach(b => { if (!b._bound) { b._bound = true; b.addEventListener("click", () => openArticle(b.dataset.art, b)); } });
+}
+function refreshArticleGrid(){
+  const ul = app.querySelector(".artgrid");
+  if (!ul) return;
+  ul.innerHTML = articleItemsHTML(); bindArticleButtons();
+}
+
+/* ---------- password gate ---------- */
+let gateEl = null, gateFails = 0, gateReturn = null;
+function closeGate(){
+  if (!gateEl) return;
+  gateEl.remove(); gateEl = null; document.removeEventListener("keydown", gateKeys);
+  if (gateReturn && gateReturn.focus && !edEl) gateReturn.focus({preventScroll:true});
+}
+function gateKeys(e){ if (e.key === "Escape") { e.preventDefault(); closeGate(); } }
+function openGate(trigger){
+  gateReturn = trigger || document.activeElement;
+  let unlocked = false;
+  try { unlocked = sessionStorage.getItem("mondini.ed") === "1"; } catch (e) {}
+  if (unlocked) { openEditor(); return; }
+  closeGate();
+  gateEl = document.createElement("div");
+  gateEl.className = "artmodal gate"; gateEl.setAttribute("role","dialog"); gateEl.setAttribute("aria-modal","true"); gateEl.setAttribute("aria-label","Editor password");
+  gateEl.innerHTML = `<form class="gateform" autocomplete="off"><label for="gpw">Password</label>
+    <input id="gpw" type="password" autocomplete="off" spellcheck="false">
+    <p class="gerr" role="alert"></p>
+    <div class="gbtns"><button type="submit" class="lb-btn">Unlock</button><button type="button" class="lb-btn" data-gclose>Cancel</button></div></form>`;
+  const form = gateEl.querySelector("form"), input = gateEl.querySelector("#gpw"), err = gateEl.querySelector(".gerr"), go = gateEl.querySelector("[type=submit]");
+  gateEl.addEventListener("click", e => { if (e.target === gateEl || e.target.closest("[data-gclose]")) closeGate(); });
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    if (sha256Hex(input.value) === EDITOR_HASH) {
+      try { sessionStorage.setItem("mondini.ed", "1"); } catch (x) {}
+      closeGate(); openEditor(); return;
+    }
+    gateFails++; input.value = ""; err.textContent = "Wrong password.";
+    go.disabled = true; setTimeout(() => { go.disabled = false; input.focus(); }, Math.min(gateFails * 1200, 8000));
+  });
+  document.body.appendChild(gateEl); document.addEventListener("keydown", gateKeys);
+  input.focus();
+}
+
+/* ---------- editor state and storage ---------- */
+let edEl = null, ed = null, edCur = 0, edTimer = null, edSlash = null, edPanel = null;
+const ED_TYPES = [
+  {type:"p", label:"Text", hint:"Plain paragraph", key:"text paragraph"},
+  {type:"h1", label:"Heading 1", hint:"Large section heading", key:"h1 heading1 title"},
+  {type:"h2", label:"Heading 2", hint:"Medium heading", key:"h2 heading2"},
+  {type:"h3", label:"Heading 3", hint:"Small heading", key:"h3 heading3"},
+  {type:"ul", label:"Bulleted list", hint:"A simple list", key:"bullet list ul"},
+  {type:"ol", label:"Numbered list", hint:"An ordered list", key:"number numbered list ol"},
+  {type:"todo", label:"To-do list", hint:"A checklist", key:"todo task checkbox check"},
+  {type:"quote", label:"Quote", hint:"Highlight a quote", key:"quote"},
+  {type:"callout", label:"Callout", hint:"A highlighted note", key:"callout note box"},
+  {type:"code", label:"Code", hint:"Monospaced code block", key:"code"},
+  {type:"hr", label:"Divider", hint:"A horizontal line", key:"divider line hr"},
+  {type:"img", label:"Image", hint:"Attach an image", key:"image photo picture attachment"}
+];
+const EDPH = {p:"Type '/' for commands", h1:"Heading 1", h2:"Heading 2", h3:"Heading 3", ul:"List item", ol:"List item", todo:"To-do", quote:"Quote", callout:"Write a note", code:"Code"};
+const TEXTY = ["p","h1","h2","h3","ul","ol","todo","quote","callout"];
+const todayISO = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+const fmtDate = iso => { const [y, m, d] = String(iso || todayISO()).split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", {year:"numeric", month:"long", day:"numeric"}); };
+const LANG_LABEL = {"en":"English", "pt-BR":"Portuguese", "es":"Spanish"};
+const isData = u => typeof u === "string" && u.startsWith("data:");
+function edCfg(){
+  const def = {owner:"mondinao", repo:"mondinao.github.io", branch:"main", token:"", role:"Game Designer"};
+  try { return Object.assign(def, JSON.parse(localStorage.getItem(ED_CFG) || "{}")); } catch (e) { return def; }
+}
+function edDrafts(){ try { return JSON.parse(localStorage.getItem(ED_DRAFTS) || "[]"); } catch (e) { return []; } }
+function edBlank(){ return {id:"draft-" + Date.now().toString(36), title:"", subtitle:"", iso:todayISO(), lang:"en", role:edCfg().role, cover:null, coverCaption:"", blocks:[{type:"p", html:""}], published:false}; }
+function edIsEmpty(){ return !ed.title && !ed.cover && ed.blocks.every(b => (b.type === "img" ? false : !(b.html || b.text || "").replace(/<br>|&nbsp;|\s/g, ""))); }
+function edStatus(msg, kind){
+  const s = edEl && edEl.querySelector("#edstatus");
+  if (s) { s.textContent = msg; s.className = "edstatus " + (kind || ""); }
+}
+function edSync(){
+  if (!edEl || !ed) return;
+  const g = id => edEl.querySelector("#" + id);
+  ed.title = g("edtitle").value.trim(); ed.subtitle = g("edsub").value.trim();
+  ed.iso = g("eddate").value || todayISO(); ed.lang = g("edlang").value; ed.role = g("edrole").value.trim() || "Game Designer";
+  const cc = g("edcovercap"); if (cc) ed.coverCaption = cc.value.trim();
+  edEl.querySelectorAll(".eb").forEach(w => {
+    const b = ed.blocks[+w.dataset.i]; if (!b) return;
+    const t = w.querySelector(".ebt"); if (t) b.html = t.innerHTML;
+    const c = w.querySelector(".ebcode"); if (c) b.text = c.textContent;
+    const cap = w.querySelector("[data-field=caption]"); if (cap) b.caption = cap.innerHTML;
+    const chk = w.querySelector(".ebchk"); if (chk) b.checked = chk.checked;
+  });
+}
+function edAutosave(){
+  clearTimeout(edTimer);
+  edTimer = setTimeout(() => {
+    if (!edEl || !ed) return;
+    edSync();
+    let list = edDrafts().filter(d => d.id !== ed.id);
+    if (!edIsEmpty()) list.unshift(Object.assign({}, ed, {saved: Date.now()}));
+    try { localStorage.setItem(ED_DRAFTS, JSON.stringify(list.slice(0, 20))); edStatus(edIsEmpty() ? "" : "Draft saved in this browser at " + new Date().toLocaleTimeString(), ""); }
+    catch (e) { edStatus("The draft is too large to save in this browser. Publish it or download a backup.", "err"); }
+  }, 700);
+}
+
+/* ---------- images ---------- */
+function edReadImage(file){
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onerror = () => rej(new Error("Could not read the file."));
+    r.onload = () => { const img = new Image(); img.onerror = () => rej(new Error("This file is not a valid image.")); img.onload = () => res(img); img.src = r.result; };
+    r.readAsDataURL(file);
+  });
+}
+function edScale(img, maxW){
+  const s = Math.min(1, maxW / img.naturalWidth), c = document.createElement("canvas");
+  c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
+  const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height);
+  return c.toDataURL("image/jpeg", 0.86);
+}
+function edSquare(img, size){
+  const m = Math.min(img.naturalWidth, img.naturalHeight), c = document.createElement("canvas");
+  c.width = c.height = size;
+  c.getContext("2d").drawImage(img, (img.naturalWidth - m) / 2, (img.naturalHeight - m) / 2, m, m, 0, 0, size, size);
+  return c.toDataURL("image/jpeg", 0.86);
+}
+function edPick(multiple){
+  return new Promise(res => { const i = document.createElement("input"); i.type = "file"; i.accept = "image/*"; i.multiple = !!multiple; i.onchange = () => res([...i.files]); i.click(); });
+}
+async function edAddFiles(i, files, replace){
+  edStatus("Adding image…");
+  try {
+    const out = [];
+    for (const f of files) { const img = await edReadImage(f); out.push({type:"img", dataUrl:edScale(img, 1600), caption:""}); }
+    edSync();
+    if (replace && ed.blocks[i]) ed.blocks.splice(i, 1, ...out); else ed.blocks.splice(i + 1, 0, ...out);
+    const last = i + out.length;
+    if (!ed.blocks[last + 1]) ed.blocks.push({type:"p", html:""});
+    edRenderBlocks(last + 1, false); edAutosave(); edStatus("Image added.", "ok");
+  } catch (err) { edStatus(err.message, "err"); }
+}
+async function edChooseCover(){
+  const [f] = await edPick(false); if (!f) return;
+  try {
+    const img = await edReadImage(f);
+    ed.cover = {card:edSquare(img, 720), photo:edScale(img, 1400)};
+    edRenderCover(); edAutosave(); edStatus("Cover image set.", "ok");
+  } catch (err) { edStatus(err.message, "err"); }
+}
+function edRenderCover(){
+  const host = edEl.querySelector("#edcover");
+  const c = ed.cover;
+  host.innerHTML = c
+    ? `<div class="edcovwrap"><img class="edcard" src="${esc(c.card)}" alt="Cover, square version used in the mosaic"><img class="edhero" src="${esc(c.photo)}" alt="Cover, wide version shown in the article"></div>
+       <input id="edcovercap" class="edfield" placeholder="Cover caption (optional)" value="${esc(ed.coverCaption || "")}">
+       <div class="edcovbtns"><button type="button" class="lb-btn" data-ed="cover">Change cover image</button><button type="button" class="lb-btn" data-ed="nocover">Remove</button></div>`
+    : `<button type="button" class="edcoverbtn" data-ed="cover">＋ Choose a cover image</button><p class="edhint">It becomes the square picture in the mosaic and the wide photo at the top of the article.</p>`;
+}
+
+/* ---------- blocks ---------- */
+function edBlockHTML(b, i, n){
+  const ctl = '<span class="ebctl"><button type="button" data-act="up" aria-label="Move block up">↑</button><button type="button" data-act="down" aria-label="Move block down">↓</button><button type="button" data-act="del" aria-label="Delete block">✕</button></span>';
+  let body;
+  if (b.type === "hr") body = '<hr class="adiv">';
+  else if (b.type === "img") body = `<figure class="artfig"><img src="${esc(b.dataUrl || b.src || "")}" alt=""><figcaption class="ebcap" contenteditable="true" data-field="caption" data-ph="Add a caption (optional)">${sanitizeInline(b.caption || "")}</figcaption></figure>`;
+  else if (b.type === "code") body = `<pre class="ebcode" contenteditable="true" spellcheck="false" data-ph="Code">${esc(b.text || "")}</pre>`;
+  else {
+    const lead = b.type === "todo" ? `<input type="checkbox" class="ebchk" ${b.checked ? "checked" : ""} aria-label="Done">` : b.type === "ul" ? '<span class="ebmark">•</span>' : b.type === "ol" ? `<span class="ebmark">${n}.</span>` : "";
+    body = `${lead}<div class="ebt" contenteditable="true" data-ph="${esc(EDPH[b.type] || "")}">${sanitizeInline(b.html || "")}</div>`;
+  }
+  return `<div class="eb eb-${b.type}" data-i="${i}">${ctl}${body}</div>`;
+}
+function edRenderBlocks(focusI, atEnd){
+  const host = edEl.querySelector("#edblocks"); let n = 0;
+  host.innerHTML = ed.blocks.map((b, i) => { n = b.type === "ol" ? ((ed.blocks[i-1] && ed.blocks[i-1].type === "ol") ? n + 1 : 1) : 0; return edBlockHTML(b, i, n); }).join("");
+  if (focusI != null) edFocus(focusI, atEnd);
+}
+function edFocusable(i){ const w = edEl.querySelector(`.eb[data-i="${i}"]`); return w && w.querySelector(".ebt, .ebcode, .ebcap"); }
+function edFocus(i, atEnd){
+  i = Math.max(0, Math.min(i, ed.blocks.length - 1));
+  const el = edFocusable(i); if (!el) return;
+  el.focus({preventScroll:false}); edCur = i;
+  const sel = getSelection(), r = document.createRange(); r.selectNodeContents(el); r.collapse(!atEnd); sel.removeAllRanges(); sel.addRange(r);
+  const ts = edEl.querySelector("#edtype"); if (ts) ts.value = ed.blocks[i].type;
+}
+function edInsertAfter(i, block, focus){ edSync(); ed.blocks.splice(i + 1, 0, block); edRenderBlocks(focus ? i + 1 : null, false); edAutosave(); }
+function edRemove(i){ edSync(); ed.blocks.splice(i, 1); if (!ed.blocks.length) ed.blocks.push({type:"p", html:""}); edRenderBlocks(Math.max(0, i - 1), true); edAutosave(); }
+function edMove(i, d){ edSync(); const j = i + d; if (j < 0 || j >= ed.blocks.length) return; [ed.blocks[i], ed.blocks[j]] = [ed.blocks[j], ed.blocks[i]]; edRenderBlocks(j, true); edAutosave(); }
+function edConvert(i, type, clear){
+  edSync(); const b = ed.blocks[i]; if (!b) return;
+  if (type === "img") { edPick(true).then(files => { if (files.length) edAddFiles(i, files, !b.html && b.type === "p" || clear); }); return; }
+  if (type === "hr") { ed.blocks.splice(i, 1, {type:"hr"}, {type:"p", html:""}); edRenderBlocks(i + 1, false); edAutosave(); return; }
+  const keep = !clear && TEXTY.includes(b.type) && TEXTY.includes(type);
+  const html = keep ? b.html : "";
+  if (type === "code") ed.blocks[i] = {type, text: clear ? "" : (b.text || (b.html || "").replace(/<[^>]*>/g, ""))};
+  else ed.blocks[i] = {type, html, checked: false};
+  edRenderBlocks(i, true); edAutosave();
+}
+function edCaretAtEdge(el, which){
+  const sel = getSelection(); if (!sel.rangeCount || !sel.isCollapsed) return false;
+  const r = sel.getRangeAt(0).cloneRange(), probe = document.createRange(); probe.selectNodeContents(el);
+  if (which === "start") probe.setEnd(r.startContainer, r.startOffset); else probe.setStart(r.endContainer, r.endOffset);
+  return probe.toString().length === 0;
+}
+function edNeighbor(i, d){ for (let j = i + d; j >= 0 && j < ed.blocks.length; j += d) if (edFocusable(j)) return j; return null; }
+function edSplit(i, t){
+  const b = ed.blocks[i], sel = getSelection(); let tail = "";
+  if (sel.rangeCount) {
+    const r = sel.getRangeAt(0), rr = document.createRange(); rr.selectNodeContents(t); rr.setStart(r.endContainer, r.endOffset);
+    const d = document.createElement("div"); d.appendChild(rr.extractContents()); tail = d.innerHTML;
+  }
+  b.html = t.innerHTML;
+  const nextType = ["ul", "ol", "todo"].includes(b.type) ? b.type : "p";
+  edSyncOthers(i); ed.blocks.splice(i + 1, 0, {type:nextType, html:tail}); edRenderBlocks(i + 1, false); edAutosave();
+}
+function edSyncOthers(skip){
+  edEl.querySelectorAll(".eb").forEach(w => { const j = +w.dataset.i; if (j === skip) return; const b = ed.blocks[j]; if (!b) return;
+    const t = w.querySelector(".ebt"); if (t) b.html = t.innerHTML; const c = w.querySelector(".ebcode"); if (c) b.text = c.textContent;
+    const cap = w.querySelector("[data-field=caption]"); if (cap) b.caption = cap.innerHTML; const chk = w.querySelector(".ebchk"); if (chk) b.checked = chk.checked; });
+}
+
+/* ---------- slash menu ---------- */
+function edSlashClose(){ if (edSlash) { edSlash.el.remove(); edSlash = null; } }
+function edSlashOpen(w, q){
+  const items = ED_TYPES.filter(x => !q || (x.label + " " + x.key).toLowerCase().includes(q.toLowerCase()));
+  if (!items.length) { edSlashClose(); return; }
+  if (!edSlash) { edSlash = {el:document.createElement("div"), sel:0, items:[], i:0}; edSlash.el.className = "slashmenu"; edSlash.el.setAttribute("role","listbox"); edEl.appendChild(edSlash.el); }
+  edSlash.items = items; edSlash.sel = 0; edSlash.i = +w.dataset.i;
+  edSlash.el.innerHTML = items.map((x, k) => `<button type="button" class="si${k === 0 ? " on" : ""}" data-slash="${x.type}"><b>${esc(x.label)}</b><span>${esc(x.hint)}</span></button>`).join("");
+  const r = w.getBoundingClientRect(); edSlash.el.style.top = Math.max(60, Math.min(r.bottom + 4, innerHeight - 320)) + "px"; edSlash.el.style.left = Math.max(12, Math.min(r.left + 30, innerWidth - 300)) + "px";
+}
+function edSlashKey(k){
+  if (!edSlash) return;
+  if (k === "Escape") { edSlashClose(); return; }
+  if (k === "Enter" || k === "Tab") { edSlashPick(edSlash.items[edSlash.sel].type); return; }
+  edSlash.sel = (edSlash.sel + (k === "ArrowDown" ? 1 : -1) + edSlash.items.length) % edSlash.items.length;
+  edSlash.el.querySelectorAll(".si").forEach((b, n) => b.classList.toggle("on", n === edSlash.sel));
+}
+function edSlashPick(type){ const i = edSlash.i; edSlashClose(); edConvert(i, type, true); }
+
+/* ---------- editor events ---------- */
+function edInput(e){
+  const t = e.target, w = t.closest && t.closest(".eb");
+  if (!w) { if (t.id) edAutosave(); return; }
+  edAutosave();
+  if (!t.classList.contains("ebt")) return;
+  const i = +w.dataset.i, b = ed.blocks[i], s = t.textContent.replace(/\u00a0/g, " ");
+  if (b.type === "p") {
+    const m = {"# ":"h1", "## ":"h2", "### ":"h3", "- ":"ul", "* ":"ul", "1. ":"ol", "[] ":"todo", "[ ] ":"todo", "> ":"quote", "``` ":"code", "```":"code", "---":"hr"}[s];
+    if (m) { edSlashClose(); edConvert(i, m, true); return; }
+    const sm = /^\/([a-z0-9 ]*)$/i.exec(s);
+    if (sm) { edSlashOpen(w, sm[1]); return; }
+  }
+  edSlashClose();
+}
+function edKey(e){
+  const t = e.target, w = t.closest && t.closest(".eb"); if (!w) return;
+  const i = +w.dataset.i, b = ed.blocks[i];
+  if (edSlash && ["ArrowDown","ArrowUp","Enter","Escape","Tab"].includes(e.key)) { e.preventDefault(); edSlashKey(e.key); return; }
+  if (t.classList.contains("ebcap")) { if (e.key === "Enter") { e.preventDefault(); edInsertAfter(i, {type:"p", html:""}, true); } return; }
+  if (t.classList.contains("ebcode")) {
+    if (e.key === "Enter") { e.preventDefault(); if (e.shiftKey) edInsertAfter(i, {type:"p", html:""}, true); else document.execCommand("insertText", false, "\n"); }
+    else if (e.key === "Tab") { e.preventDefault(); document.execCommand("insertText", false, "  "); }
+    else if (e.key === "Backspace" && !t.textContent) { e.preventDefault(); edConvert(i, "p", true); }
+    return;
+  }
+  if (!t.classList.contains("ebt") || e.isComposing) return;
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    if (!t.textContent.trim() && b.type !== "p") { edConvert(i, "p", true); return; }
+    edSplit(i, t); return;
+  }
+  if (e.key === "Backspace" && !t.textContent) { e.preventDefault(); if (b.type !== "p") edConvert(i, "p", true); else if (ed.blocks.length > 1) edRemove(i); return; }
+  if (e.key === "ArrowUp" && edCaretAtEdge(t, "start")) { const j = edNeighbor(i, -1); if (j != null) { e.preventDefault(); edFocus(j, true); } }
+  if (e.key === "ArrowDown" && edCaretAtEdge(t, "end")) { const j = edNeighbor(i, 1); if (j != null) { e.preventDefault(); edFocus(j, false); } }
+}
+function edPaste(e){
+  const t = e.target; if (!(t.closest && t.closest(".ebt, .ebcode, .ebcap"))) return;
+  const cd = e.clipboardData; if (!cd) return;
+  const files = [...(cd.files || [])].filter(f => f.type.startsWith("image/"));
+  e.preventDefault();
+  if (files.length) { edAddFiles(edCur, files, false); return; }
+  const text = cd.getData("text/plain").replace(/\r/g, "");
+  const parts = t.classList.contains("ebt") ? text.split(/\n{2,}/) : [text];
+  document.execCommand("insertText", false, parts[0].replace(/\n/g, t.classList.contains("ebcode") ? "\n" : " "));
+  if (parts.length > 1) { edSync(); const w = t.closest(".eb"), i = +w.dataset.i; ed.blocks.splice(i + 1, 0, ...parts.slice(1).map(p => ({type:"p", html:esc(p.replace(/\n/g, " ").trim())}))); edRenderBlocks(i + parts.length - 1, true); edAutosave(); }
+}
+function edWrapCode(){
+  const sel = getSelection(); if (!sel.rangeCount || sel.isCollapsed) { edStatus("Select some text first, then click Code."); return; }
+  const r = sel.getRangeAt(0), c = document.createElement("code"); c.appendChild(r.extractContents()); r.insertNode(c); edAutosave();
+}
+function edTool(name){
+  if (["bold", "italic", "underline", "strikeThrough"].includes(name)) { document.execCommand(name); edAutosave(); return; }
+  if (name === "code") { edWrapCode(); return; }
+  if (name === "link") {
+    const sel = getSelection(); if (!sel || sel.isCollapsed) { edStatus("Select some text first, then click Link."); return; }
+    let u = prompt("Link address (https://...)"); if (!u) return;
+    if (!/^(https?:\/\/|mailto:)/i.test(u)) u = "https://" + u;
+    document.execCommand("createLink", false, u); edAutosave(); return;
+  }
+  if (name === "image") { edPick(true).then(files => { if (files.length) edAddFiles(edCur, files, false); }); return; }
+  if (name === "hr") { edInsertAfter(edCur, {type:"hr"}, false); edInsertAfter(edCur + 1, {type:"p", html:""}, true); }
+}
+
+/* ---------- article object, preview, download ---------- */
+function edToArticle(mode){   // mode "pub": JSON-safe (image paths). mode "view": for display (data URLs allowed)
+  const pub = mode === "pub", iso = ed.iso || todayISO();
+  const id = ed.published ? ed.id : (slugify(ed.title) || "article") + "-" + iso.replace(/-/g, "");
+  const keep = b => b.type === "hr" || (b.type === "img" && (b.src || b.dataUrl)) || (b.type === "code" && (b.text || "").trim()) || (TEXTY.includes(b.type) && sanitizeInline(b.html || "").replace(/<br>|&nbsp;|\s/g, ""));
+  const blocks = ed.blocks.filter(keep).map(b => {
+    if (b.type === "img") return pub ? {type:"img", src:b.src, caption:sanitizeInline(b.caption || "")} : {type:"img", src:b.src, dataUrl:b.dataUrl, caption:sanitizeInline(b.caption || "")};
+    if (b.type === "code") return {type:"code", text:b.text || ""};
+    if (b.type === "hr") return {type:"hr"};
+    const o = {type:b.type, html:sanitizeInline(b.html || "")}; if (b.type === "todo") o.checked = !!b.checked; return o;
+  });
+  const c = ed.cover || {};
+  return {id, title:ed.title, subtitle:ed.subtitle, author:"Gustavo Mondini", role:ed.role, date:fmtDate(iso), iso, lang:ed.lang, langLabel:LANG_LABEL[ed.lang] || ed.lang,
+    card: pub ? c.cardPath : (c.card || c.cardPath), photo: pub ? c.photoPath : (c.photo || c.photoPath), photoAlt: ed.title, caption: ed.coverCaption || "", blocks};
+}
+function edPreview(){ edSync(); if (!ed.title) { edStatus("Add a title to preview the article.", "err"); return; } openArticleObj(edToArticle("view"), null); }
+function edDownload(){
+  edSync();
+  const blob = new Blob([JSON.stringify(Object.assign(edToArticle("view"), {cover:ed.cover}), null, 1)], {type:"application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = (slugify(ed.title) || "article") + ".json"; document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ---------- GitHub publishing ---------- */
+const b64Text = s => btoa(unescape(encodeURIComponent(s)));
+const fromB64Text = b => decodeURIComponent(escape(atob(String(b).replace(/\n/g, ""))));
+async function ghError(r){
+  let m = ""; try { m = (await r.json()).message || ""; } catch (e) {}
+  const hint = r.status === 401 ? "GitHub rejected the token. Check it in Settings." : r.status === 403 ? "The token does not have permission (it needs Contents: Read and write on this repository)." : r.status === 404 ? "Repository or file not found. Check the owner, repository name and token access in Settings." : (r.status === 409 || r.status === 422) ? "GitHub reported a conflict. Try again." : "GitHub error " + r.status + ".";
+  return new Error(hint + (m ? " (" + m + ")" : ""));
+}
+const ghHeaders = cfg => ({Authorization:"Bearer " + cfg.token, Accept:"application/vnd.github+json", "X-GitHub-Api-Version":"2022-11-28"});
+const ghUrl = (cfg, path) => `https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/contents/${path}`;
+async function ghGet(cfg, path){
+  const r = await fetch(ghUrl(cfg, path) + "?ref=" + encodeURIComponent(cfg.branch) + "&t=" + Date.now(), {headers:ghHeaders(cfg), cache:"no-store"});
+  if (r.status === 404) return null;
+  if (!r.ok) throw await ghError(r);
+  return r.json();
+}
+async function ghPut(cfg, path, b64, message, sha){
+  const body = {message, content:b64, branch:cfg.branch}; if (sha) body.sha = sha;
+  const r = await fetch(ghUrl(cfg, path), {method:"PUT", headers:Object.assign({"Content-Type":"application/json"}, ghHeaders(cfg)), body:JSON.stringify(body)});
+  if (!r.ok) throw await ghError(r);
+  return r.json();
+}
+async function ghUpdateIndex(cfg, mutate, message){
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const cur = await ghGet(cfg, "articles/index.json");
+    let list = {articles:[]}, sha;
+    if (cur) { sha = cur.sha; try { list = JSON.parse(fromB64Text(cur.content)); } catch (e) {} if (Array.isArray(list)) list = {articles:list}; }
+    list.articles = mutate(list.articles || []);
+    try { await ghPut(cfg, "articles/index.json", b64Text(JSON.stringify(list, null, 1)), message, sha); return; }
+    catch (e) { if (attempt === 1) throw e; }
+  }
+}
+async function edPublish(){
+  edSync();
+  const cfg = edCfg();
+  if (!ed.title) { edStatus("Add a title first.", "err"); return; }
+  if (!ed.cover) { edStatus("Choose a cover image first (it is the picture in the mosaic).", "err"); return; }
+  if (!ed.blocks.some(b => b.type === "img" || (b.html || b.text || "").replace(/<[^>]*>|&nbsp;|\s/g, ""))) { edStatus("Write something in the article first.", "err"); return; }
+  if (!cfg.token) { edStatus("Add your GitHub token in Settings first.", "err"); edSettings(); return; }
+  const btn = edEl.querySelector('[data-ed="publish"]'); btn.disabled = true;
+  try {
+    const iso = ed.iso || todayISO(), id = ed.published ? ed.id : (slugify(ed.title) || "article") + "-" + iso.replace(/-/g, ""), ts = Date.now().toString(36);
+    const upload = async (dataUrl, name) => { const path = `articles/img/${id}-${name}-${ts}.jpg`; await ghPut(cfg, path, dataUrl.split(",")[1], "Add article image"); return path; };
+    edStatus("Publishing… uploading the cover");
+    const c = ed.cover;
+    if (isData(c.card)) c.cardPath = await upload(c.card, "card"); else if (!c.cardPath) c.cardPath = c.card;
+    if (isData(c.photo)) c.photoPath = await upload(c.photo, "photo"); else if (!c.photoPath) c.photoPath = c.photo;
+    let n = 0;
+    for (const b of ed.blocks) if (b.type === "img" && b.dataUrl && !b.src) { n++; edStatus(`Publishing… uploading image ${n}`); b.src = await upload(b.dataUrl, "img" + n); }
+    edStatus("Publishing… updating the article list");
+    ed.id = id; ed.published = true;
+    const art = edToArticle("pub");
+    await ghUpdateIndex(cfg, list => [art].concat(list.filter(x => x.id !== art.id)), "Publish article: " + art.title);
+    const live = edToArticle("view"); live._remote = true;
+    const k = ARTICLES.findIndex(x => x.id === live.id); if (k >= 0) ARTICLES[k] = live; else ARTICLES.push(live);
+    if (location.hash === "#/articles-and-analysis") refreshArticleGrid();
+    edAutosave();
+    edStatus("Published ✓ It will be visible to everyone in about 1 to 2 minutes (GitHub Pages is rebuilding).", "ok");
+  } catch (err) { edStatus(err.message || "Could not publish.", "err"); }
+  btn.disabled = false;
+}
+async function edDeletePublished(id){
+  const cfg = edCfg();
+  if (!cfg.token) { edStatus("Add your GitHub token in Settings first.", "err"); return; }
+  edStatus("Removing the article…");
+  try {
+    await ghUpdateIndex(cfg, list => list.filter(x => x.id !== id), "Remove article: " + id);
+    const k = ARTICLES.findIndex(x => x.id === id); if (k >= 0) ARTICLES.splice(k, 1);
+    if (location.hash === "#/articles-and-analysis") refreshArticleGrid();
+    edStatus("Article removed. It disappears for everyone in 1 to 2 minutes.", "ok");
+  } catch (err) { edStatus(err.message, "err"); }
+}
+
+/* ---------- editor window ---------- */
+function edSaveNow(){
+  if (!edEl || !ed) return;
+  clearTimeout(edTimer); edSync();
+  const list = edDrafts().filter(d => d.id !== ed.id);
+  if (!edIsEmpty()) list.unshift(Object.assign({}, ed, {saved: Date.now()}));
+  try { localStorage.setItem(ED_DRAFTS, JSON.stringify(list.slice(0, 20))); } catch (e) {}
+}
+function edGlobalKeys(e){
+  if (e.key !== "Escape" || artEl) return;
+  if (edSlash) { edSlashClose(); return; }
+  if (edPanel) { edClosePanel(); }
+}
+function closeEditor(){
+  if (!edEl) return;
+  edSaveNow(); edSlashClose(); edClosePanel();
+  edEl.remove(); edEl = null; ed = null; document.body.style.overflow = "";
+  document.removeEventListener("keydown", edGlobalKeys);
+  const sl = document.querySelector("#secretlogo"); if (sl) sl.focus({preventScroll:true});
+}
+function edLoad(obj){
+  ed = obj ? JSON.parse(JSON.stringify(obj)) : edBlank();
+  const g = id => edEl.querySelector("#" + id);
+  g("edtitle").value = ed.title || ""; g("edsub").value = ed.subtitle || ""; g("eddate").value = ed.iso || todayISO();
+  g("edlang").value = ed.lang || "en"; g("edrole").value = ed.role || "Game Designer";
+  edRenderCover(); edRenderBlocks(null); edStatus("");
+  edEl.querySelector(".edscroll").scrollTop = 0;
+}
+function edFromArticle(a){
+  return {id:a.id, title:a.title, subtitle:a.subtitle || "", iso:a.iso || todayISO(), lang:a.lang || "en", role:a.role || edCfg().role,
+    cover:{card:a.card, photo:a.photo, cardPath:isData(a.card) ? "" : a.card, photoPath:isData(a.photo) ? "" : a.photo},
+    coverCaption:a.caption || "", blocks:(a.blocks || []).map(b => Object.assign({}, b)), published:true};
+}
+function openEditor(){
+  closeEditor(); closeGate(); closeArticle();
+  edEl = document.createElement("div");
+  edEl.className = "edmodal"; edEl.setAttribute("role","dialog"); edEl.setAttribute("aria-modal","true"); edEl.setAttribute("aria-label","Article editor");
+  const types = ED_TYPES.filter(t => t.type !== "hr" && t.type !== "img").map(t => `<option value="${t.type}">${esc(t.label)}</option>`).join("");
+  edEl.innerHTML = `<div class="edtop">
+      <strong class="edname">Article editor</strong>
+      <span class="edstatus" id="edstatus" role="status"></span>
+      <span class="edbtns">
+        <button type="button" class="lb-btn" data-ed="new">New</button>
+        <button type="button" class="lb-btn" data-ed="open">Open</button>
+        <button type="button" class="lb-btn" data-ed="preview">Preview</button>
+        <button type="button" class="lb-btn" data-ed="download">Backup</button>
+        <button type="button" class="lb-btn" data-ed="settings">Settings</button>
+        <button type="button" class="lb-btn primary" data-ed="publish">Publish</button>
+        <button type="button" class="lb-btn" data-ed="close">✕ Close</button>
+      </span>
+    </div>
+    <div class="edscroll"><div class="edpage">
+      <div id="edcover" class="edcover"></div>
+      <input id="edtitle" class="edtitle" placeholder="Article title" maxlength="140" aria-label="Title">
+      <input id="edsub" class="edsub" placeholder="Subtitle" maxlength="200" aria-label="Subtitle">
+      <div class="edmeta">
+        <label>Date<input id="eddate" type="date"></label>
+        <label>Language<select id="edlang"><option value="en">English</option><option value="pt-BR">Portuguese</option><option value="es">Spanish</option></select></label>
+        <label>Role shown under the title<input id="edrole" maxlength="60"></label>
+      </div>
+      <div class="edtools" role="toolbar" aria-label="Formatting">
+        <button type="button" data-tool="bold" title="Bold (Ctrl+B)"><b>B</b></button>
+        <button type="button" data-tool="italic" title="Italic (Ctrl+I)"><i>I</i></button>
+        <button type="button" data-tool="underline" title="Underline (Ctrl+U)"><u>U</u></button>
+        <button type="button" data-tool="strikeThrough" title="Strikethrough"><s>S</s></button>
+        <button type="button" data-tool="code" title="Inline code">&lt;/&gt;</button>
+        <button type="button" data-tool="link" title="Link">Link</button>
+        <span class="sep"></span>
+        <select id="edtype" aria-label="Block type">${types}</select>
+        <span class="sep"></span>
+        <button type="button" data-tool="image" title="Attach an image">Image</button>
+        <button type="button" data-tool="hr" title="Divider">Divider</button>
+      </div>
+      <p class="edhint">Tip: type <b>/</b> for the block menu, or use shortcuts like <b># </b> heading, <b>- </b> list, <b>1. </b> numbered list, <b>[] </b> to-do, <b>&gt; </b> quote, <b>---</b> divider. You can also paste images.</p>
+      <div id="edblocks" class="edblocks"></div>
+      <button type="button" class="edadd" data-ed="addblock">+ Add a block</button>
+    </div></div>`;
+  document.body.appendChild(edEl); document.body.style.overflow = "hidden";
+  edLoad(null);
+  edEl.addEventListener("click", edClick);
+  edEl.addEventListener("input", edInput);
+  edEl.addEventListener("keydown", edKey);
+  edEl.addEventListener("paste", edPaste);
+  edEl.addEventListener("focusin", e => { const w = e.target.closest && e.target.closest(".eb"); if (w && ed && ed.blocks[+w.dataset.i]) { edCur = +w.dataset.i; const ts = edEl.querySelector("#edtype"); if (ts && ts.querySelector(`[value="${ed.blocks[edCur].type}"]`)) ts.value = ed.blocks[edCur].type; } });
+  edEl.addEventListener("change", e => {
+    if (e.target.id === "edtype") { edConvert(edCur, e.target.value, false); return; }
+    edAutosave();
+  });
+  edEl.addEventListener("mousedown", e => { if (e.target.closest && e.target.closest(".edtools button")) e.preventDefault(); });
+  edEl.querySelector(".edscroll").addEventListener("scroll", edSlashClose);
+  document.addEventListener("keydown", edGlobalKeys);
+  edEl.querySelector("#edtitle").focus();
+}
+function edClick(e){
+  const t = e.target;
+  const sl = t.closest("[data-slash]"); if (sl) { edSlashPick(sl.dataset.slash); return; }
+  if (edSlash && !t.closest(".slashmenu")) edSlashClose();
+  const act = t.closest("[data-act]");
+  if (act) { const i = +act.closest(".eb").dataset.i; if (act.dataset.act === "up") edMove(i, -1); else if (act.dataset.act === "down") edMove(i, 1); else edRemove(i); return; }
+  const tool = t.closest("[data-tool]"); if (tool) { edTool(tool.dataset.tool); return; }
+  const d = t.closest("[data-ed]"); if (!d) return;
+  const what = d.dataset.ed;
+  if (what === "new") { edSaveNow(); edLoad(null); edStatus("New article."); }
+  else if (what === "open") edOpenPanel();
+  else if (what === "preview") edPreview();
+  else if (what === "download") edDownload();
+  else if (what === "settings") edSettings();
+  else if (what === "publish") edPublish();
+  else if (what === "close") closeEditor();
+  else if (what === "cover") edChooseCover();
+  else if (what === "nocover") { ed.cover = null; edRenderCover(); edAutosave(); }
+  else if (what === "addblock") { edSync(); ed.blocks.push({type:"p", html:""}); edRenderBlocks(ed.blocks.length - 1, false); }
+}
+
+/* ---------- panels: open article, settings ---------- */
+function edClosePanel(){ if (edPanel) { edPanel.remove(); edPanel = null; } }
+function edPanelShell(title, inner){
+  edClosePanel();
+  edPanel = document.createElement("div"); edPanel.className = "edpanel"; edPanel.setAttribute("role","dialog"); edPanel.setAttribute("aria-label", title);
+  edPanel.innerHTML = `<div class="edpanelbox"><div class="edpanelhead"><strong>${esc(title)}</strong><button type="button" class="lb-btn" data-p="close">✕ Close</button></div>${inner}</div>`;
+  edEl.appendChild(edPanel);
+  edPanel.addEventListener("click", e => { if (e.target === edPanel || e.target.closest('[data-p="close"]')) edClosePanel(); });
+  return edPanel;
+}
+function edOpenPanel(){
+  edSync();
+  const drafts = edDrafts().filter(d => !ed || d.id !== ed.id), pubs = ARTICLES.filter(a => a._remote);
+  const p = edPanelShell("Open an article", `
+    <h3>My drafts <small>(saved in this browser)</small></h3>
+    ${drafts.length ? `<ul class="edlist">${drafts.map(d => `<li><button type="button" class="edopen" data-p="draft" data-id="${esc(d.id)}">${esc(d.title || "Untitled")}<small>${esc(new Date(d.saved || Date.now()).toLocaleString())}</small></button><button type="button" class="lb-btn" data-p="deldraft" data-id="${esc(d.id)}">Delete</button></li>`).join("")}</ul>` : '<p class="edhint">No other drafts.</p>'}
+    <h3>Published from the editor</h3>
+    ${pubs.length ? `<ul class="edlist">${pubs.map(a => `<li><button type="button" class="edopen" data-p="pub" data-id="${esc(a.id)}">${esc(a.title)}<small>${esc(a.date)}</small></button><button type="button" class="lb-btn" data-p="delpub" data-id="${esc(a.id)}">Remove</button></li>`).join("")}</ul>` : '<p class="edhint">Nothing published from the editor yet.</p>'}`);
+  p.addEventListener("click", e => {
+    const b = e.target.closest("[data-p]"); if (!b) return; const id = b.dataset.id, kind = b.dataset.p;
+    if (kind === "draft") { edSaveNow(); const d = edDrafts().find(x => x.id === id); if (d) { edLoad(d); edClosePanel(); edStatus("Draft opened."); } }
+    else if (kind === "deldraft") { if (confirm("Delete this draft from this browser?")) { try { localStorage.setItem(ED_DRAFTS, JSON.stringify(edDrafts().filter(x => x.id !== id))); } catch (x) {} edOpenPanel(); } }
+    else if (kind === "pub") { const a = ARTICLES.find(x => x.id === id); if (a) { edSaveNow(); edLoad(edFromArticle(a)); edClosePanel(); edStatus("Published article opened. Publish again to update it."); } }
+    else if (kind === "delpub") { if (confirm("Remove this article from the site for everyone?")) { edClosePanel(); edDeletePublished(id); } }
+  });
+}
+function edSettings(){
+  const c = edCfg();
+  const p = edPanelShell("Settings", `
+    <p class="edhint">To publish without uploading files by hand, the editor saves your article straight into your GitHub repository. For that it needs a personal access token. The token is kept only in this browser and is never part of the site.</p>
+    <div class="edform">
+      <label>GitHub user<input id="cfgowner" value="${esc(c.owner)}" autocomplete="off"></label>
+      <label>Repository<input id="cfgrepo" value="${esc(c.repo)}" autocomplete="off"></label>
+      <label>Branch<input id="cfgbranch" value="${esc(c.branch)}" autocomplete="off"></label>
+      <label>Token<input id="cfgtoken" type="password" value="${esc(c.token)}" autocomplete="off" spellcheck="false" placeholder="github_pat_..."></label>
+      <label>Default role under the title<input id="cfgrole" value="${esc(c.role)}"></label>
+    </div>
+    <div class="edcovbtns"><button type="button" class="lb-btn primary" data-p="savecfg">Save</button><button type="button" class="lb-btn" data-p="testcfg">Test connection</button></div>
+    <p id="cfgmsg" class="edhint" role="status"></p>
+    <details class="edhelp"><summary>How to create the token (once)</summary><ol>
+      <li>On github.com, open your profile menu, then <b>Settings</b>, then <b>Developer settings</b> at the bottom of the left menu.</li>
+      <li>Choose <b>Personal access tokens</b>, then <b>Fine-grained tokens</b>, then <b>Generate new token</b>.</li>
+      <li>Give it a name, choose an expiration date, and under <b>Repository access</b> pick <b>Only select repositories</b> and select this site's repository.</li>
+      <li>Under <b>Permissions</b>, open <b>Repository permissions</b> and set <b>Contents</b> to <b>Read and write</b>.</li>
+      <li>Click <b>Generate token</b>, copy it and paste it above. GitHub shows it only once.</li>
+    </ol></details>`);
+  const read = () => ({owner:p.querySelector("#cfgowner").value.trim(), repo:p.querySelector("#cfgrepo").value.trim(), branch:p.querySelector("#cfgbranch").value.trim() || "main", token:p.querySelector("#cfgtoken").value.trim(), role:p.querySelector("#cfgrole").value.trim() || "Game Designer"});
+  p.addEventListener("click", async e => {
+    const b = e.target.closest("[data-p]"); if (!b) return; const msg = p.querySelector("#cfgmsg");
+    if (b.dataset.p === "savecfg") { try { localStorage.setItem(ED_CFG, JSON.stringify(read())); msg.textContent = "Saved in this browser."; } catch (x) { msg.textContent = "Could not save the settings."; } }
+    if (b.dataset.p === "testcfg") {
+      const c2 = read(); msg.textContent = "Testing…";
+      try {
+        const r = await fetch(`https://api.github.com/repos/${encodeURIComponent(c2.owner)}/${encodeURIComponent(c2.repo)}`, {headers:ghHeaders(c2), cache:"no-store"});
+        if (!r.ok) throw await ghError(r);
+        const j = await r.json();
+        msg.textContent = j.permissions && j.permissions.push ? "Connected to " + j.full_name + ". The token can publish." : "Connected to " + j.full_name + ", but this token cannot write to it. Check the Contents permission.";
+      } catch (err) { msg.textContent = err.message; }
+    }
+  });
+}
+
+// Articles: a mosaic of 1:1 boxes; clicking one opens the full article in a popup
+let artEl = null, artReturn = null;
+function articleBody(md){
+  return md.split(/\n\s*\n/).map(b => {
+    b = b.trim();
+    if (b === "---") return '<hr class="adiv">';
+    if (b.startsWith("## ")) return `<h2>${esc(b.slice(3))}</h2>`;
+    if (b.startsWith("> ")) return `<p class="pull">${esc(b.slice(2))}</p>`;
+    return `<p>${esc(b)}</p>`;
+  }).join("");
+}
+function closeArticle(){
+  if (!artEl) return;
+  artEl.remove(); artEl = null; document.body.style.overflow = "";
+  document.removeEventListener("keydown", artKeys);
+  if (artReturn && artReturn.focus) artReturn.focus({preventScroll:true});
+}
+function artKeys(e){
+  if (!artEl) return;
+  if (e.key === "Escape") { e.preventDefault(); closeArticle(); return; }
+  if (e.key === "Tab") { const b = [...artEl.querySelectorAll("button, a[href]")]; if (!b.length) return; const i = b.indexOf(document.activeElement); e.preventDefault(); b[(i + (e.shiftKey ? -1 : 1) + b.length) % b.length].focus(); }
+}
+function articleView(a, lang){
+  const t = lang === "en" && a.en ? a.en : a;
+  return `<header class="arthead">
+      <h1 id="art-title">${esc(t.title)}</h1>
+      <p class="artsub">${esc(t.subtitle)}</p>
+      <p class="artby"><strong>${esc(a.author)}</strong> · ${esc(a.role)} · <time>${esc(a.date)}</time></p>
+    </header>
+    <hr class="adiv strong">
+    ${a.photo ? `<figure class="artfig"><img src="${esc(a.photo)}" alt="${esc(a.photoAlt)}" loading="lazy">${t.caption ? `<figcaption>${esc(t.caption)}</figcaption>` : ""}</figure>` : ""}
+    <div class="artbody">${a.blocks ? articleBlocksHTML(a.blocks) : articleBody(t.body)}</div>`;
+}
+function openArticle(id, trigger){
+  const a = ARTICLES.find(x => x.id === id);
+  if (a) openArticleObj(a, trigger);
+}
+function openArticleObj(a, trigger){
+  closeArticle();
+  artReturn = trigger || document.activeElement;
+  artEl = document.createElement("div");
+  artEl.className = "artmodal"; artEl.setAttribute("role","dialog"); artEl.setAttribute("aria-modal","true"); artEl.setAttribute("aria-labelledby","art-title");
+  const langs = `<div class="langtoggle" role="group" aria-label="Article language"><button type="button" class="langbtn on" data-lang="${esc(a.lang)}" aria-pressed="true">${esc(a.langLabel)}</button>${a.en ? '<button type="button" class="langbtn" data-lang="en" aria-pressed="false">English</button>' : ""}</div>`;
+  artEl.innerHTML = `<div class="artpanel" tabindex="-1">
+    <div class="artbar">${langs}<button type="button" class="lb-btn" data-artclose>✕ Close</button></div>
+    <article lang="${esc(a.lang)}">${articleView(a, a.lang)}</article>
+    <div class="artfoot"><button type="button" class="lb-btn" data-artclose>✕ Close</button></div>
+  </div>`;
+  artEl.addEventListener("click", e => {
+    if (e.target === artEl || e.target.closest("[data-artclose]")) { closeArticle(); return; }
+    const lb = e.target.closest("[data-lang]");
+    if (!lb) return;
+    const lang = lb.dataset.lang, art = artEl.querySelector("article");
+    art.innerHTML = articleView(a, lang === "en" ? "en" : a.lang);
+    art.setAttribute("lang", lang === "en" ? "en" : a.lang);
+    artEl.querySelectorAll("[data-lang]").forEach(x => { const on = x === lb; x.classList.toggle("on", on); x.setAttribute("aria-pressed", String(on)); });
+    artEl.querySelector(".artpanel").scrollTop = 0;
+  });
+  document.body.appendChild(artEl); document.body.style.overflow = "hidden"; if (edEl) artEl.style.zIndex = "130";
+  document.addEventListener("keydown", artKeys);
+  const panel = artEl.querySelector(".artpanel"); panel.scrollTop = 0; artEl.querySelector("[data-artclose]").focus({preventScroll:true});
+}
+function articlesHTML(c){
+  return `<section class="acad arts">
+    <ul class="artgrid">${articleItemsHTML()}</ul>
+    <footer class="artsfoot"><button type="button" class="logomini" id="secretlogo" aria-label="Mondgine logo"><img src="img/brand/mondgine-watermark.png" alt="" width="44" height="44"></button></footer>
+  </section>`;
+}
+// YouTube page: video cards in a rail; a click opens the video in a popup player
+const PLAY_ICON = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor"><path d="M8.5 5.8v12.4a.6.6 0 00.9.5l10-6.2a.6.6 0 000-1l-10-6.2a.6.6 0 00-.9.5z"/></svg>';
+function videoCardHTML(v){
+  const thumb = "https://i.ytimg.com/vi/" + encodeURIComponent(v.id) + "/hqdefault.jpg";
+  return `<button type="button" class="card vcard" data-yt="${esc(v.id)}" data-title="${esc(v.title)}" aria-label="Play the video: ${esc(v.title)}" style="background:linear-gradient(160deg,#5a2a52,#0b0b0d)">
+    <img class="cover" src="${thumb}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+    <span class="play">${PLAY_ICON}</span>
+    <div class="name"><span>${esc(v.title)}</span></div></button>`;
+}
+function openVideo(id, title, trigger, vertical){
+  closeArticle();
+  artReturn = trigger || document.activeElement;
+  artEl = document.createElement("div");
+  artEl.className = "artmodal"; artEl.setAttribute("role","dialog"); artEl.setAttribute("aria-modal","true"); artEl.setAttribute("aria-label", title);
+  artEl.innerHTML = `<div class="artpanel vpanel${vertical ? " vshort" : ""}" tabindex="-1">
+    <div class="artbar"><span class="vt">${esc(title)}</span><button type="button" class="lb-btn" data-artclose>✕ Close</button></div>
+    <div class="vidframe${vertical ? " vertical" : ""}"><iframe src="https://www.youtube.com/embed/${esc(id)}?autoplay=1&rel=0" title="${esc(title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <p class="vlink"><a href="https://www.youtube.com/${vertical ? "shorts/" : "watch?v="}${esc(id)}" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+  </div>`;
+  artEl.addEventListener("click", e => { if (e.target === artEl || e.target.closest("[data-artclose]")) closeArticle(); });
+  document.body.appendChild(artEl); document.body.style.overflow = "hidden";
+  document.addEventListener("keydown", artKeys);
+  artEl.querySelector("[data-artclose]").focus({preventScroll:true});
+}
+function youtubeHTML(c){
+  const y = c.youtube;
+  const ch = y.channel;
+  const icon = '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.2 9.4v5.2l4.6-2.6z" fill="currentColor"/></svg>';
+  return `<section class="acad ytpage">
+    <p class="lead catintro">${esc(y.lead)}</p>
+    ${moreHTML("yt-more", y.more)}
+    <a class="chstrip" href="${esc(ch.url)}" target="_blank" rel="noopener">
+      <span class="cico">${icon}</span>
+      <span class="ctext"><span class="cval">${esc(ch.name)} on YouTube</span><span class="clabel">${esc(ch.handle)}</span></span>
+      <span class="chgo">Visit the channel ↗</span>
+    </a>
+    <h2 class="ytsec">Videos</h2>
+    <p class="ytnote">${esc(y.videosNote)}</p>
+    ${railHTML(y.videos, "Videos", "wide", videoCardHTML)}
+    <h2 class="ytsec">Shorts <span class="pill soonpill">More coming soon</span></h2>
+    <p class="ytnote">${esc(y.shortsNote)}</p>
+    <ul class="shorts">${(y.shorts || []).map(v => `<li><button type="button" class="short" data-yt="${esc(v.id)}" data-vertical="1" data-title="${esc(v.title)}" aria-label="Play the Short: ${esc(v.title)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"><span class="play">${PLAY_ICON}</span><span class="stitle">${esc(v.title)}</span></button></li>`).join("")}${Array.from({length: Math.max(0, 4 - (y.shorts || []).length)}, () => `<li aria-hidden="true"><span class="slot">Coming soon</span></li>`).join("")}</ul>
+  </section>`;
+}
+function category(c){
+  const secs = c.articles ? articlesHTML(c) : c.youtube ? youtubeHTML(c) : c.ugc ? ugcHTML(c) : (c.sections || []).map(sec => sectionHTML(c, sec)).join("");
+  app.innerHTML = `<div class="project">
+    <p class="topbtn"><a class="steam" href="#/">← Back to Home Page</a></p>
+    <h1>${esc(c.title)}</h1>
+    ${c.intro ? `<p class="lead catintro">${esc(c.intro)}</p>` : ""}
+    ${secs || `<p class="soon">Content coming soon.</p>`}
+    <p class="bottom"><a class="steam" href="#/">← Back to Home Page</a></p></div>`;
+  initCarousels(); initMore(); initReveal();
+  bindArticleButtons();
+  const sl = app.querySelector("#secretlogo"); if (sl) sl.addEventListener("click", () => openGate(sl));
+  if (c.articles) loadRemoteArticles().then(ok => { if (ok && location.hash === "#/articles-and-analysis") refreshArticleGrid(); });
+  app.querySelectorAll("[data-yt]").forEach(b => b.addEventListener("click", () => openVideo(b.dataset.yt, b.dataset.title, b, b.dataset.vertical === "1")));
+  markRailDuplicates(); initRail();
+}
+
+function jobHTML(j, k){
+  return `<li class="job"><span class="jobdate">${esc(j.date)}</span><h3 class="jobtitle">${esc(j.title)}</h3><p class="jobco">${esc(j.company)}</p>${moreHTML("job-" + k, j.paras)}</li>`;
+}
+function home(){
+  app.innerHTML = `
+  <header>
+    <h1>Gustavo Mondini's Portfolio</h1>
+    <p>Game Designer – Level Design Specialist &amp; Producer.</p>
+  </header>
+  <section class="projects" aria-labelledby="mp">
+    <h2 id="mp">Main Projects</h2>
+  </section>
+  ${railHTML(PROJECTS, "Main projects")}
+  <section class="partners" aria-labelledby="pt">
+    <h2 id="pt">Partnerships</h2>
+    <ul class="plist">${PROJECTS.map(projectButton).join("")}</ul>
+  </section>
+  <section class="about" id="about" aria-labelledby="ab">
+    <h2 id="ab">About Me</h2>
+    <div class="aboutgrid">
+      <div class="abouttext">
+        <p class="lead">${esc(ABOUT.intro)}</p>
+        ${moreHTML("aboutmore", ABOUT.more)}
+        <dl class="aboutfacts">${ABOUT.facts.map(([k,v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+      </div>
+      <figure class="aboutphoto"><img src="img/brand/gustavo.webp" alt="Gustavo Mondini smiling and giving a thumbs up at Gamescom Latam" width="800" height="800" loading="lazy"></figure>
+    </div>
+  </section>
+  <section class="history" id="history" aria-labelledby="ph">
+    <h2 id="ph">Professional History</h2>
+    <ol class="jobs">${HISTORY.map(jobHTML).join("")}</ol>
+  </section>
+  <section class="projects" aria-labelledby="op">
+    <h2 id="op">Other Projects</h2>
+  </section>
+  ${railHTML(OTHER, "Other projects", "wide")}
+  <section class="contact" id="contact" aria-labelledby="ct">
+    <h2 id="ct">Contact</h2>
+    <ul class="clist">
+      <li><a class="cbtn" href="${esc(CONTACT.linkedin.url)}" target="_blank" rel="noopener"><span class="cico">${ICON.linkedin}</span><span class="ctext"><span class="clabel">LinkedIn</span><span class="cval">${esc(CONTACT.linkedin.text)}</span></span></a></li>
+      <li><a class="cbtn" href="mailto:${esc(CONTACT.emailUser)}@${esc(CONTACT.emailHost)}"><span class="cico">${ICON.email}</span><span class="ctext"><span class="clabel">E-mail</span><span class="cval">${esc(CONTACT.emailUser)}@${esc(CONTACT.emailHost)}</span></span></a></li>
+      <li><a class="cbtn" href="${esc(CONTACT.whatsapp.url)}" target="_blank" rel="noopener" aria-label="Chat with me on WhatsApp"><span class="cico">${ICON.whatsapp}</span><span class="ctext"><span class="clabel">WhatsApp</span><span class="cval">${esc(CONTACT.whatsapp.text)}</span></span></a></li>
+    </ul>
+  </section>`;
+  // duplicates exist only for the looping animation; hidden from screen readers
+  markRailDuplicates();
+  initRail(); initMore();
+}
+
+function mediaKit(p){
+  const carouselOf = (images, label, full) => (images && images.length) ? `<div class="car${full ? " full" : ""}" role="group" aria-roledescription="carousel" aria-label="${esc(label)} images">${
+      images.map((im,k) => `<figure class="slide${im.fit || im.video ? " fit" : ""}"${im.bg ? ` style="background:${esc(im.bg)}"` : ""}>${im.video
+        ? `<video src="${esc(im.video)}"${im.poster ? ` poster="${esc(im.poster)}"` : ""} muted playsinline preload="metadata" aria-label="${esc(im.title)}"></video>`
+        : im.src
+        ? `<a class="zoom" href="${esc(im.src)}" target="_blank" rel="noopener" aria-label="Open ${esc(im.title)} in full size"><img src="${esc(im.src)}" alt="${esc(im.title)}" loading="lazy"></a>`
+        : `<div class="ph" style="background:linear-gradient(${135+k*40}deg, ${p.color}, #0b0b0d)">Image placeholder</div>`}<figcaption class="cap">${esc(im.title)}</figcaption></figure>`).join("")
+    }${images.length > 1 ? `<button type="button" class="arrow prev" aria-label="Previous image"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="arrow next" aria-label="Next image"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="count" aria-hidden="true"></span>` : ""}</div>` : "";
+  const carousel = g => carouselOf(g.images, g.title);
+  // A category can have one video (video:"ID") or several (videos:[{title:"...", id:"ID"}]). An empty id shows "Video coming soon".
+  const oneVideo = (title, id, note) => `<div class="cell">` + (id === ""
+    ? `<div class="video cat-video">Video coming soon</div>`
+    : `<div class="video cat-video"><iframe src="https://www.youtube.com/embed/${esc(id)}" title="${esc(p.title)} ${esc(title || "video")}" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>`)
+    + `<p class="vcap">${title ? `<span class="vtitle">${esc(title)}</span>` : ""}${id ? `<a href="https://www.youtube.com/watch?v=${esc(id)}" target="_blank" rel="noopener">Watch on YouTube</a>` : ""}</p>${note ? `<p class="note"><em>${esc(note)}</em></p>` : ""}</div>`;
+  const catVideo = g => (g.videos || (g.video === undefined ? [] : [{title:g.videoTitle, id:g.video}])).map(v => oneVideo(v.title, v.id)).join("");
+  // Media layout: the image carousel sits beside the first video, the other videos fill a 2-column grid below.
+  const media = g => { const car = carousel(g), vids = catVideo(g);
+    return vids ? `<div class="media">${car ? `<div class="cell">${car}</div>` : ""}${vids}</div>` : car; };
+  // featured: larger videos shown full width below the media grid
+  const featured = g => (g.featured||[]).map(v => `<div class="featured">${oneVideo(v.title, v.id)}</div>`).join("");
+  // blocks: render media in the exact order given. {video:{title,id,note}} = full-size video, {images:[...]} = full-width carousel, {videos:[...]} = videos side by side.
+  const blocks = g => (g.blocks||[]).map(b => b.video ? `<div class="featured">${oneVideo(b.video.title, b.video.id, b.video.note)}</div>`
+    : b.images ? carouselOf(b.images, g.title, true)
+    : b.videos ? `<div class="media">${b.videos.map(v => oneVideo(v.title, v.id, v.note)).join("")}</div>`
+    : b.mosaic ? `<div class="media">${b.mosaic.images ? `<div class="cell">${carouselOf(b.mosaic.images, g.title)}</div>` : ""}${(b.mosaic.videos||[]).map(v => oneVideo(v.title, v.id, v.note)).join("")}</div>`
+    : b.text ? `<p class="para">${esc(b.text)}</p>`
+    : b.list ? `<ul class="blist">${b.list.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "").join("");
+  const groups = list => (list||[]).map(g => `<h3>${esc(g.title)}</h3>${g.points && g.points.length ? `<ul>${g.points.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` : ""}${g.blocks ? blocks(g) : media(g) + featured(g)}`).join("");
+  return {oneVideo, groups, carouselOf};
+}
+
+function project(p){
+  const clips = (p.clips||[]).map(u => `<div class="video"><video src="${esc(u)}" controls muted loop playsinline preload="none"></video></div>`);
+  const yt = (p.videos||[]).map(id => id
+    ? `<div><div class="video"><iframe src="https://www.youtube.com/embed/${esc(id)}" title="${esc(p.title)} video" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div><p class="alt"><a href="https://www.youtube.com/watch?v=${esc(id)}" target="_blank" rel="noopener">Watch on YouTube</a></p></div>`
+    : `<div class="video">Video coming soon</div>`);
+  const fact = (k,v) => v ? `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>` : "";
+  const kit = mediaKit(p), oneVideo = kit.oneVideo, contrib = kit.groups(p.contribution);
+  app.innerHTML = `<div class="project">
+    <p class="topbtn"><a class="steam" href="#/">← Back to Home Page</a></p>
+    <h1>${esc(p.title)}</h1>
+    <div class="top">
+      <div class="info">
+        <dl class="facts">
+          ${fact("My roles",p.role)}${fact("Worked on it",p.period)}${fact("Studio",p.studio)}${fact(p.partnerLabel,p.partner)}${fact("Genre",p.genre)}${fact("Release",p.release)}${fact("Platform",p.platform)}${fact("Engine",p.engine)}
+        </dl>
+        <p>${esc(p.text)}</p>
+        <p><a class="steam" href="${esc(p.steam)}" target="_blank" rel="noopener">View on Steam</a></p>
+      </div>
+      ${p.trailer === undefined ? "" : oneVideo("Trailer", p.trailer)}
+    </div>
+    ${contrib ? `<section class="contrib"><h2>My contribution</h2>${p.lead?`<p class="lead">${esc(p.lead)}</p>`:""}${contrib}</section>` : ""}
+    <div class="videos">${yt.concat(clips).join("")}</div>
+    <p class="bottom"><a class="steam" href="#/">← Back to Home Page</a></p></div>`;
+  initCarousels();
+}
+
+// Image carousels: fade to the next image every 3 s; hover/focus enlarges and pauses.
+let cleanups = [];
+function initCarousels(){
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  app.querySelectorAll(".car").forEach(car => {
+    const slides = [...car.querySelectorAll(".slide")];
+    const vids = slides.map(sl => sl.querySelector("video"));
+    const prev = car.querySelector(".arrow.prev"), next = car.querySelector(".arrow.next"), count = car.querySelector(".count");
+    let i = 0, t = null, paused = false, visible = true;
+    const play = v => { if (v && visible && !reduce) { const r = v.play(); if (r && r.catch) r.catch(() => {}); } };
+    const show = n => { i = (n + slides.length) % slides.length;
+      slides.forEach((s,k) => { s.classList.toggle("on", k===i); s.setAttribute("aria-hidden", k===i ? "false" : "true"); });
+      vids.forEach((v,k) => { if (!v) return; if (k === i) { v.currentTime = 0; play(v); } else v.pause(); });
+      if (count) count.textContent = (i+1) + " / " + slides.length; };
+    const stop = () => clearTimeout(t);
+    // image slides advance after 3 s; a video slide advances when the video ends
+    const start = () => { stop(); if (reduce || paused || slides.length < 2 || vids[i]) return; t = setTimeout(() => { show(i+1); start(); }, 3000); };
+    const hold = () => { paused = true; stop(); }, release = () => { paused = false; start(); };
+    vids.forEach((v,k) => { if (!v) return; v.muted = true; v.loop = false;
+      v.addEventListener("ended", () => { if (k !== i) return; if (paused || reduce) { v.currentTime = 0; play(v); } else { show(i+1); start(); } });
+      v.addEventListener("click", () => { if (v.paused) play(v); else v.pause(); }); });
+    car.addEventListener("mouseenter", hold); car.addEventListener("mouseleave", release);
+    car.addEventListener("focusin", hold); car.addEventListener("focusout", release);
+    if (prev) prev.addEventListener("click", () => { show(i-1); start(); });
+    if (next) next.addEventListener("click", () => { show(i+1); start(); });
+    if ("IntersectionObserver" in window) {            // videos only play while the reel is on screen
+      const io = new IntersectionObserver(es => { visible = es[0].isIntersecting; const v = vids[i]; if (v) { if (visible) play(v); else v.pause(); } }, {threshold: 0.35});
+      io.observe(car); cleanups.push(() => io.disconnect());
+    }
+    show(0); start(); cleanups.push(stop);
+  });
+}
+
+function route(){
+  closeLightbox(); closeArticle(); closeGate();
+  cleanups.forEach(f => f()); cleanups = [];
+  const slug = location.hash.replace("#/","");
+  const p = PROJECTS.find(x => x.slug === slug);
+  const o = OTHER.find(x => x.slug === slug);
+  if (p && p.locked) { history.replaceState(null,"","#/"); return route(); }
+  document.body.classList.toggle("home", !p && !o);
+  const content = p ? project(p) : o ? category(o) : home();
+  window.scrollTo(0,0);
+  document.title = p ? `${p.title} – Gustavo Mondini` : o ? `${o.title} – Gustavo Mondini` : "Gustavo Mondini's Portfolio";
+  app.classList.add("wrap");
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>
